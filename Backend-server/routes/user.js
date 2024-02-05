@@ -11,5 +11,9 @@ router
    * createUser
    * */
   .post(validate(userValidation.createUser), userController.create)
+  /**
+   * login
+   */
+  .get(validate(userValidation.login), userController.login)
 
 module.exports = router;

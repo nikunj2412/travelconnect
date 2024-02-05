@@ -9,4 +9,11 @@ const createUser = {
     }),
 };
 
-module.exports = {createUser}
+const login = {
+  body: Joi.object().keys({
+    email: Joi.string().email(),
+    password: Joi.string(),
+  }),
+};
+
+module.exports = {createUser, login}

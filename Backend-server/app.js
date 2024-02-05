@@ -13,14 +13,6 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-// const bodyParser = require('body-parser')
-
-// app.set('view engin','ejs')
-
-// app.use(bodyParser.urlencoded({extended:true}))
-
-// app.use(express.static('public'))
-
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));

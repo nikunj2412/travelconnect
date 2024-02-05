@@ -2,7 +2,6 @@ const { userService } = require('../service')
 
 const create = async (req, res) => {
     const { body } = req;
-    console.log("body==in controller=", body)
     const user = await userService.createUser(body);
     return res.send({ results: user });
 };
@@ -14,6 +13,12 @@ const get = async (req, res) => {
     };
     const user = await userService.getUserById(filter);
     return res.send({ results: user });
-  };
+};
 
-module.exports = {create, get}
+const login = async (req, res) => {
+  const body = req.body;
+  const user = await userService.login(body);
+  return res.send({ results: user })
+}
+
+module.exports = {create, get, login}
