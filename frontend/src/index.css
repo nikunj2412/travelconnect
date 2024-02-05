@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primary-color: #E4573D;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background: #F3FFFF;
+  max-width: 100%;
+}
+
+.home-container{
+  max-width: 90%;
+  margin: 0 auto;
+}
+/* Header Component  */
+
+.register-btn{
+    border: 1px solid #e4573d;
+    padding: 4px 8px;
+    border-radius: 8px;
+
+}
+.login-btn{
+  background: #e4573d;
+  padding: 4px 16px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+/* Home Page  */
+
+.hero-icon{
+  color: #3aa2ca;
+}
+.flex-equal-column{
+  flex: 1 0 50%;
+}
+
+/* Feature Component  */
