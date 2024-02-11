@@ -1,13 +1,47 @@
 import React from "react";
-import { MdEmail } from "react-icons/md";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email address").required("Enter Email"),
+  password: Yup.string().required("Enter Password"),
+});
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3333/v1/user",
+          values
+        );
+        if (response.status === 200) {
+          console.log("Authentication successful");
+          navigate('/')
+        } else {
+          console.error("Authentication failed");
+        }
+        console.log("API Response", response.data);
+        resetForm();
+      } catch (error) {
+        console.error("Error during API call", error);
+      }
+    },
+  });
+
   return (
     <div className="flex flex-wrap w-full bg-white">
-        <div className="w-1/2 shadow-2xl">
+      <div className="w-1/2 shadow-2xl">
         <img
           className="hidden md:w-3/5 md:mx-auto md:object-contain h-screen md:block"
           src="public/assets/images/login-bg.png"
@@ -21,32 +55,45 @@ const SignIn = () => {
         </div>
         <div className="flex flex-col justify-center px-8 pt-8 my-auto md:justify-start md:pt-0 md:px-24 lg:px-32">
           <p className="text-3xl text-center">Welcome.</p>
-          <form className="flex flex-col pt-3 md:pt-8">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="flex flex-col pt-3 md:pt-8"
+          >
             <div className="flex flex-col pt-4">
               <div className="flex relative ">
                 <span className=" inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
-                <MdOutlineMail className="text-orange-600 text-xl"/>
+                  <MdOutlineMail className="text-orange-600 text-xl" />
                 </span>
                 <input
                   type="text"
-                  id="design-login-email"
+                  name="email"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
                   className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                   placeholder="Email"
                 />
               </div>
+              {formik.touched.email && formik.errors.email && (
+                <div className="text-red-500 px-12">{formik.errors.email}</div>
+              )}
             </div>
             <div className="flex flex-col pt-4 mb-12">
               <div className="flex relative ">
                 <span className=" inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
-                  <RiLockPasswordFill className="text-orange-600 text-xl"/>
+                  <RiLockPasswordFill className="text-orange-600 text-xl" />
                 </span>
                 <input
                   type="password"
-                  id="design-login-password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
                   className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                   placeholder="Password"
                 />
               </div>
+              {formik.touched.password && formik.errors.password && (
+                <div className="text-red-500 px-12">{formik.errors.password}</div>
+              )}
             </div>
             <button
               type="submit"
@@ -58,15 +105,13 @@ const SignIn = () => {
           <div className="pt-12 pb-12 text-center">
             <p>
               Don&#x27;t have an account?
-              <Link to='/signup'
-             className="font-semibold underline">
+              <Link to="/signup" className="font-semibold underline">
                 Register here.
               </Link>
             </p>
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

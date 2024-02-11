@@ -1,8 +1,11 @@
 import React from 'react'
+import TopDestination from '../component/Destination/TopDestination'
 
 const Destinations = () => {
   return (
-    <div>Destinations</div>
+    <div className='md:w-4/5 mx-auto'>
+    <TopDestination/>
+    </div>
   )
 }
 

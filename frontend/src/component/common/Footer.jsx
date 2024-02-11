@@ -42,13 +42,13 @@ const Footer = () => {
               <h2 className="mb-4 font-medium">About</h2>
               <ul>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="#">About Us</a>
+                  <a href="/about-us">About Us</a>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="#">Features</a>
+                  <a href="/features">Features</a>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="#">Contact Us</a>
+                  <a href="/contact-us">Contact Us</a>
                 </li>
               </ul>
             </div>

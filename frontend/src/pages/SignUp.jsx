@@ -31,11 +31,9 @@ const SignUp = () => {
         }
         );
         console.log('API response:', response.data);
-        // Add further logic based on API response
         resetForm();
       } catch (error) {
         console.error('Error during API request:', error);
-        // Handle error appropriately
       }
     },
   });
