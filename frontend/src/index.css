@@ -41,4 +41,7 @@ body{
   flex: 1 0 50%;
 }
 
-/* Feature Component  */
+/* About Page  */
+.about-bg{
+  background-image: url(../public/assets/images/about-bg.jpg);
+}
