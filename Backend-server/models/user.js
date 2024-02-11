@@ -5,14 +5,22 @@ const userSchema = new mongoose.Schema({
     firstName: {type: String},
     lastName: {type: String},
     email: {type: String},
-    dateOfBirth: {
+    address: {
       type: String
     },
     password: {
       type: String,
       private: true,
     },
+    mobileNumber: {
+      type: String
+    }
 });
+
+userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
+  const User = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  return !!User;
+};
   
 userSchema.pre('save', async function (next) {
     const User = this;

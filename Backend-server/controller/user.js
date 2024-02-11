@@ -1,10 +1,11 @@
 const { userService } = require('../service')
+const {catchAsync} = require("../utils/catchAsync")
 
-const create = async (req, res) => {
+const create = catchAsync(async (req, res) => {
     const { body } = req;
     const user = await userService.createUser(body);
     return res.send({ results: user });
-};
+});
 
 const get = async (req, res) => {
     const { userId } = req.params;
@@ -15,10 +16,20 @@ const get = async (req, res) => {
     return res.send({ results: user });
 };
 
-const login = async (req, res) => {
+const login = catchAsync(async(req, res) => {
   const body = req.body;
   const user = await userService.login(body);
   return res.send({ results: user })
-}
+});
 
-module.exports = {create, get, login}
+const update = catchAsync(async (req, res) => {
+  const { body } = req;
+  const { userId } = req.params;
+  const filter = {
+    _id: userId,
+  };
+  const user = await userService.updateUser(filter, body);
+  return res.send({ results: user });
+});
+
+module.exports = {create, get, login, update}

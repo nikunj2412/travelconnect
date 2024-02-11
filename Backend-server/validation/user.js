@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const createUser = {
     body: Joi.object().keys({
@@ -16,4 +17,10 @@ const login = {
   }),
 };
 
-module.exports = {createUser, login}
+const updateUser = {
+  params: Joi.object().keys({
+    userId: Joi.objectId().required(),
+  })
+}
+
+module.exports = {createUser, login, updateUser}

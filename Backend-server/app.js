@@ -3,6 +3,7 @@ const express = require('express');
 const routes = require('./routes')
 const cors = require('cors');
 const sendResponse = require('./middleware/sendResponse');
+const { errorConverter, errorHandler } = require('./middleware/error');
 const path = require('path');
 
 const app = express();
@@ -23,11 +24,12 @@ app.use(cors());
 app.options('*', cors());
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use('/v1', routes);
+app.use(errorConverter);
+// handle error
+app.use(errorHandler);
+
 app.listen(3333,()=>{
 
     console.log("**** Server is listening at port 3333 !!!! ***")
 })
-
-app.use('/v1', routes);
-
-

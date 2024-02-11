@@ -16,4 +16,11 @@ router
    */
   .get(validate(userValidation.login), userController.login)
 
+router
+  .route('/:userId')
+  /**
+   * updateUser
+   * */
+  .put(validate(userValidation.updateUser), userController.update)
+
 module.exports = router;

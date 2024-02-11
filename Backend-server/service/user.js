@@ -14,7 +14,6 @@ async function getUserById(id) {
 }
 
 async function login(body) {
-    try {
         const { email, password } = body;
 
         if (!email || !password) {
@@ -34,13 +33,28 @@ async function login(body) {
         } else {
             throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Password');
         }
-    } catch (error) {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'An API error occurred');
-    }
+}
+
+async function getOne(query) {
+  const user = await userModel.findOne(query);
+  return user;
+}
+
+async function updateUser(filter, body) {
+  const userData = await getOne(filter);
+  if (!userData) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
+  }
+  if (body.email && (await userModel.isEmailTaken(body.email, userData.id))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  const user = await userModel.findOneAndUpdate(filter, body, { new: true });
+  return user;
 }
 
 module.exports = {
     createUser,
     getUserById,
-    login
+    login,
+    updateUser
 }
