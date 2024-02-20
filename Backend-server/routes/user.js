@@ -22,5 +22,9 @@ router
    * updateUser
    * */
   .put(validate(userValidation.updateUser), userController.update)
+  /**
+   * deleteUser
+   */
+  .delete(validate(userValidation.deleteUserById), userController.remove);
 
 module.exports = router;

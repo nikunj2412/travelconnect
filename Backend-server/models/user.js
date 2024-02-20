@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     },
     mobileNumber: {
       type: String
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
     }
 });
 

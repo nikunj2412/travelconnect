@@ -4,6 +4,9 @@ const ApiError = require('../utils/ApiError');
 const bcrypt = require("bcrypt");
 
 async function createUser(body) {
+  if (await userModel.isEmailTaken(body.email)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
     const user = await userModel.create(body);
     return user;
 }
@@ -52,9 +55,15 @@ async function updateUser(filter, body) {
   return user;
 }
 
+async function removeUser(filter) {
+  const user = await userModel.findOneAndRemove(filter);
+  return user;
+}
+
 module.exports = {
     createUser,
     getUserById,
     login,
-    updateUser
+    updateUser,
+    removeUser
 }

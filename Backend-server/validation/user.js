@@ -23,4 +23,10 @@ const updateUser = {
   })
 }
 
-module.exports = {createUser, login, updateUser}
+const deleteUserById = {
+  params: Joi.object().keys({
+    userId: Joi.objectId().required(),
+  }),
+};
+
+module.exports = {createUser, login, updateUser, deleteUserById}

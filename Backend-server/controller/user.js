@@ -32,4 +32,13 @@ const update = catchAsync(async (req, res) => {
   return res.send({ results: user });
 });
 
-module.exports = {create, get, login, update}
+const remove = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const filter = {
+    _id: userId,
+  };
+  const user = await userService.removeUser(filter);
+  return res.send({ results: user });
+});
+
+module.exports = {create, get, login, update, remove}

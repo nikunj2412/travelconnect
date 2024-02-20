@@ -8,7 +8,7 @@ const getAllUser = async (req, res) => {
 
 const login = catchAsync(async(req, res) => {
   const body = req.body;
-  const user = await userService.login(body);
+  const user = await adminService.adminLogin(body);
   return res.send({ results: user })
 });
 
