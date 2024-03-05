@@ -12,4 +12,10 @@ const login = catchAsync(async(req, res) => {
   return res.send({ results: user })
 });
 
-module.exports = {getAllUser, login}
+const create = catchAsync(async (req, res) => {
+  const { body } = req;
+  const travelPost = await adminService.createTravelPost(body);
+  return res.send({ results: travelPost });
+});
+
+module.exports = {getAllUser, login, create}

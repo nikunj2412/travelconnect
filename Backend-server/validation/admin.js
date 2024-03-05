@@ -10,4 +10,13 @@ const login = {
 
 const getAllUser = {};
 
-module.exports = {login, getAllUser}
+const create = {
+  body: Joi.object().keys({
+    name: Joi.string(),
+    description: Joi.string(),
+    image: Joi.string(),
+    price: Joi.number(),
+  }),
+}
+
+module.exports = {login, getAllUser, create}

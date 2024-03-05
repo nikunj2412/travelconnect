@@ -1,4 +1,4 @@
-const { userModel } = require('../models');
+const { userModel, travelModel } = require('../models');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const bcrypt = require("bcrypt");
@@ -36,7 +36,13 @@ async function adminLogin(body) {
     }
 }
 
+async function createTravelPost(body) {
+      const travelPost = await travelModel.create(body);
+      return travelPost;
+}
+
 module.exports = {
     getAllUser,
-    adminLogin
+    adminLogin,
+    createTravelPost
 }
