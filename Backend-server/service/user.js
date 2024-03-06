@@ -56,7 +56,7 @@ async function updateUser(filter, body) {
 }
 
 async function removeUser(filter) {
-  const user = await userModel.findOneAndRemove(filter);
+  const user = await userModel.findOneAndDelete(filter);
   return user;
 }
 

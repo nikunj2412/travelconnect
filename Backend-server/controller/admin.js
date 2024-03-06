@@ -1,4 +1,4 @@
-const { adminService } = require('../service')
+const { adminService, tokenService } = require('../service')
 const {catchAsync} = require("../utils/catchAsync")
 
 const getAllUser = async (req, res) => {
@@ -18,4 +18,42 @@ const create = catchAsync(async (req, res) => {
   return res.send({ results: travelPost });
 });
 
-module.exports = {getAllUser, login, create}
+const get = async (req, res) => {
+  const { travelPostId } = req.params;
+  const filter = {
+    _id: travelPostId,
+  };
+  const travelPost = await adminService.getTravelPostById(filter);
+  return res.send({ results: travelPost });
+};
+
+const update = catchAsync(async (req, res) => {
+  const { body } = req;
+  const { travelPostId } = req.params;
+  const filter = {
+    _id: travelPostId,
+  };
+  const travelPost = await adminService.updateTravelPost(filter, body);
+  return res.send({ results: travelPost });
+});
+
+const remove = catchAsync(async (req, res) => {
+  const { travelPostId } = req.params;
+  const filter = {
+    _id: travelPostId,
+  };
+  const travelPost = await adminService.removeTravelPost(filter);
+  return res.send({ results: travelPost });
+});
+
+const refreshTokens = catchAsync(async (req, res) => {
+  const tokens = await adminService.refreshAuth(req.body.refreshToken);
+  res.send({ results: { ...tokens } });
+});
+
+const logout = catchAsync(async (req, res) => {
+  await tokenService.invalidateToken(req.body);
+  res.send({ results: { success: true } });
+});
+
+module.exports = {getAllUser, login, create, get, update, remove, refreshTokens, logout}
