@@ -11,6 +11,11 @@ async function getAllUser() {
     return user;
 }
 
+async function getAllTravelPost () {
+  const travelPosts = await travelModel.find();
+  return travelPosts;
+};
+
 async function adminLogin(body) {
     const { email, password, isAdmin } = body;
 
@@ -98,6 +103,7 @@ const resetPasswordToken = async (resetPasswordRequest) => {
 
 module.exports = {
     getAllUser,
+    getAllTravelPost,
     adminLogin,
     createTravelPost,
     getTravelPostById,

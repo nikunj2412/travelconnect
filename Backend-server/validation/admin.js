@@ -10,19 +10,23 @@ const login = {
 
 const getAllUser = {};
 
+const getAllTravelPost = {};
+
 const create = {
   body: Joi.object().keys({
-    title: Joi.string(),
-    description: Joi.string(),
-    image: Joi.string(),
-    price: Joi.number(),
-    duration: Joi.string(),
+    packageName: Joi.string(),
+    packageDescription: Joi.string(),
+    packagePrice: Joi.number(),
     location: Joi.string(),
-    includedServices: Joi.string(),
-    excludedServices: Joi.string(),
-    aminities: Joi.string()
+    packageDays: Joi.number(),
+    packageNights: Joi.number(),
+    packageActivity: Joi.string(),
+    inclusion: Joi.string(),
+    exclusion: Joi.string(),
+    packageImages: Joi.array()
   }),
-}
+};
+
 
 const getTravelPost = {
   params: Joi.object().keys({
@@ -57,6 +61,7 @@ const logout = {
 module.exports = {
   login, 
   getAllUser, 
+  getAllTravelPost,
   create, 
   getTravelPost, 
   updateTravelPost, 

@@ -1,27 +1,16 @@
 const mongoose = require('mongoose')
 
 const travelpostSchema = new mongoose.Schema({
-    title: {type: String},
-    description: {type: String},
-    image: {type: String},
-    price: {
-      type: Number
-    },
-    duration: {
-        type: String
-    },
-    location: {
-        type: String
-    },
-    includedServices: {
-        type: String
-    },
-    excludedServices: {
-        type: String
-    },
-    aminities: {
-        type: String
-    }
+    packageName: { type: String },
+    packageDescription: { type: String },
+    packagePrice: { type: Number },
+    location: { type: String },
+    packageDays: { type: Number },
+    packageNights: { type: Number },
+    packageActivity: { type: String },
+    inclusion: { type: String },
+    exclusion: { type: String },
+    packageImages: {type: Array}
 });
 
 const travelpostModel = mongoose.model('travelpost',travelpostSchema)

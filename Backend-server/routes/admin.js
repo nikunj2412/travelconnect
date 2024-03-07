@@ -21,6 +21,13 @@ router
   .get(validate(adminValidation.getAllUser), adminController.getAllUser)
 
 router
+.route('/travel-posts')
+/**
+ * GetAllTravelPost
+ * */
+.get(validate(adminValidation.getAllTravelPost), adminController.getAllTravelPost)
+
+router
   .route('/create')
   /**
    * CreateTravelPost

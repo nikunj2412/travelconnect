@@ -12,6 +12,16 @@ const login = catchAsync(async(req, res) => {
   return res.send({ results: user })
 });
 
+const getAllTravelPost = async (req, res) => {
+  try {
+    const travelPosts = await adminService.getAllTravelPost();
+    return res.send({ results: travelPosts });
+  } catch (error) {
+    console.error('Error while fetching travel posts:', error);
+    return res.status(500).send({ error: 'Internal Server Error' });
+  }
+};
+
 const create = catchAsync(async (req, res) => {
   const { body } = req;
   const travelPost = await adminService.createTravelPost(body);
@@ -56,4 +66,4 @@ const logout = catchAsync(async (req, res) => {
   res.send({ results: { success: true } });
 });
 
-module.exports = {getAllUser, login, create, get, update, remove, refreshTokens, logout}
+module.exports = {getAllUser,getAllTravelPost, login, create, get, update, remove, refreshTokens, logout}
