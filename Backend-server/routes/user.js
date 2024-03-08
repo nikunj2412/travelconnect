@@ -15,7 +15,10 @@ router
   /**
    * login
    */
-  .get(validate(userValidation.login), userController.login)
+
+  router
+    .route('/userLogin')
+  .post(validate(userValidation.login), userController.login)
 
 router
   .route('/')

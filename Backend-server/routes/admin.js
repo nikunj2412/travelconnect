@@ -11,7 +11,7 @@ router
   /**
    * login
    */
-  .get(validate(adminValidation.login), adminController.login)
+  .post(validate(adminValidation.login), adminController.login)
 
 router
   .route('/')
