@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const toJSON = require('./plugins/toJSON.plugin')
 
 const travelpostSchema = new mongoose.Schema({
     packageName: { type: String },
@@ -12,6 +13,8 @@ const travelpostSchema = new mongoose.Schema({
     exclusion: { type: String },
     packageImages: {type: Array}
 });
+
+travelpostSchema.plugin(toJSON);
 
 const travelpostModel = mongoose.model('travelpost',travelpostSchema)
   

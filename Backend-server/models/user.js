@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require("bcrypt");
+const toJSON = require('./plugins/toJSON.plugin')
 
 const userSchema = new mongoose.Schema({
     firstName: {type: String},
@@ -20,6 +21,8 @@ const userSchema = new mongoose.Schema({
       default: false
     }
 });
+
+userSchema.plugin(toJSON);
 
 userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
   const User = await this.findOne({ email, _id: { $ne: excludeUserId } });

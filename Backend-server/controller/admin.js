@@ -9,7 +9,8 @@ const getAllUser = async (req, res) => {
 const login = catchAsync(async(req, res) => {
   const body = req.body;
   const user = await adminService.adminLogin(body);
-  return res.send({ results: user })
+  const token = await tokenService.generateAuthTokens(user);
+  return res.send({ results: {user, token} })
 });
 
 const getAllTravelPost = async (req, res) => {

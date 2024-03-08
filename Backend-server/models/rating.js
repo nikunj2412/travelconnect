@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const toJSON = require('./plugins/toJSON.plugin')
 
 const ratingSchema = new mongoose.Schema(
   {
@@ -30,6 +31,9 @@ const ratingSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+ratingSchema.plugin(toJSON);
+
 
 const rating = mongoose.model('rating', ratingSchema);
 

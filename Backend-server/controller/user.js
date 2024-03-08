@@ -1,4 +1,4 @@
-const { userService } = require('../service')
+const { userService, tokenService } = require('../service')
 const {catchAsync} = require("../utils/catchAsync")
 
 const create = catchAsync(async (req, res) => {
@@ -19,17 +19,17 @@ const get = async (req, res) => {
 const login = catchAsync(async(req, res) => {
   const body = req.body;
   const user = await userService.login(body);
-  return res.send({ results: user })
+  const token = await tokenService.generateAuthTokens(user);
+  return res.send({ results: {user, token} })
 });
 
 const update = catchAsync(async (req, res) => {
-  const { body } = req;
-  const { userId } = req.params;
+  const { body, user } = req;
   const filter = {
-    _id: userId,
+    _id: user._id,
   };
-  const user = await userService.updateUser(filter, body);
-  return res.send({ results: user });
+  const updatedUser = await userService.updateUser(filter, body);
+  return res.send({ results: updatedUser });
 });
 
 const remove = catchAsync(async (req, res) => {

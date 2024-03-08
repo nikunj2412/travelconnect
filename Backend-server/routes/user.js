@@ -1,5 +1,6 @@
 const express = require('express')
 const { userValidation } = require('../validation');
+const auth = require('../middleware/auth')
 const { userController } = require('../controller');
 const validate = require('../middleware/validate');
 
@@ -17,11 +18,13 @@ router
   .get(validate(userValidation.login), userController.login)
 
 router
-  .route('/:userId')
+  .route('/')
   /**
    * updateUser
    * */
-  .put(validate(userValidation.updateUser), userController.update)
+  .put(auth(), 
+  // validate(userValidation.updateUser), 
+  userController.update)
   /**
    * deleteUser
    */

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const enumModel = require('./enum');
+const toJSON = require('./plugins/toJSON.plugin')
+
 const tokenSchema = mongoose.Schema(
   {
     token: {
@@ -26,6 +28,9 @@ const tokenSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+tokenSchema.plugin(toJSON);
+
 /**
  * @typedef Token
  */
