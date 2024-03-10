@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const TourPackage = () => {
+const Rating = () => {
   const [packages, setPackages] = useState([]);
 
   useEffect(() => {
@@ -40,9 +40,7 @@ const TourPackage = () => {
           <tr>
           <th className="border px-4 py-2">Package Image</th>
             <th className="border px-4 py-2">Package Name</th>
-            <th className="border px-4 py-2">Price</th>
-            <th className="border px-4 py-2">Location</th>
-            <th className="border px-4 py-2">Actions</th>
+            <th className="border px-4 py-2">Average Rating</th>
           </tr>
         </thead>
         <tbody>
@@ -56,16 +54,7 @@ const TourPackage = () => {
                   />
                 </td>
               <td className="border px-4 py-2">{data.packageName}</td>
-              <td className="border px-4 py-2">${data.packagePrice}</td>
-              <td className="border px-4 py-2">{data.location}</td>
-              <td className="border px-4 py-2">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded" onClick={() => handleEdit(data.id)}>
-                  Edit
-                </button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(data.id)}>
-                  Delete
-                </button>
-              </td>
+              <td className="border px-4 py-2">4</td>
             </tr>
           ))}
         </tbody>
@@ -74,4 +63,4 @@ const TourPackage = () => {
   );
 };
 
-export default TourPackage;
+export default Rating;

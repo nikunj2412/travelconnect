@@ -7,7 +7,7 @@ import {
 } from 'react-icons/hi'
 import { TbBrandBooking } from "react-icons/tb";
 import { IoIosAddCircleOutline } from "react-icons/io";
-
+import { MdOutlineReviews } from "react-icons/md";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -41,6 +41,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <TbBrandBooking />
 
 	},
+	{
+		key: 'rating',
+		label: 'Rating',
+		path: '/rating',
+		icon: <MdOutlineReviews />
+	}
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

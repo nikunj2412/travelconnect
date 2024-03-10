@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
 import AddPackage from "./pages/AddPackage";
 import TourPackage from "./pages/TourPackage";
+import Rating from "./pages/Rating";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route path="customers" element={<Customers />} />
           <Route path="/add-packages" element={<AddPackage />} />
           <Route path="/packages" element={<TourPackage />} />
-          
+          <Route path="/rating" element={<Rating />} />
         </Route>
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
