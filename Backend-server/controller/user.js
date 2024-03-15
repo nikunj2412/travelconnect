@@ -24,9 +24,10 @@ const login = catchAsync(async(req, res) => {
 });
 
 const update = catchAsync(async (req, res) => {
-  const { body, user } = req;
+  const { body } = req;
+  const { userId } = req.params;
   const filter = {
-    _id: user._id,
+    _id: userId,
   };
   const updatedUser = await userService.updateUser(filter, body);
   return res.send({ results: updatedUser });
