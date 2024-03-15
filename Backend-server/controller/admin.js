@@ -14,13 +14,8 @@ const login = catchAsync(async(req, res) => {
 });
 
 const getAllTravelPost = async (req, res) => {
-  try {
     const travelPosts = await adminService.getAllTravelPost();
     return res.send({ results: travelPosts });
-  } catch (error) {
-    console.error('Error while fetching travel posts:', error);
-    return res.status(500).send({ error: 'Internal Server Error' });
-  }
 };
 
 const create = catchAsync(async (req, res) => {

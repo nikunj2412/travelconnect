@@ -11,6 +11,8 @@ const travelpostSchema = new mongoose.Schema({
     packageActivity: { type: String },
     inclusion: { type: String },
     exclusion: { type: String },
+    packageRating: {type: Number, default: 0},
+    averageRating: {type: Number, default: 0},
     packageImages: {type: Array}
 });
 

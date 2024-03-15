@@ -21,12 +21,12 @@ router
   .post(validate(userValidation.login), userController.login)
 
 router
-  .route('/')
+  .route('/update/:userId')
   /**
    * updateUser
    * */
-  .put(auth(), 
-  // validate(userValidation.updateUser), 
+  .put(
+  validate(userValidation.updateUser), 
   userController.update)
   /**
    * deleteUser
