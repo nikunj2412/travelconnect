@@ -18,8 +18,14 @@ const TourismPlaces = () => {
     fetchData();
   }, []);
 
-  const handleEdit = (id) => {
-    console.log('Edit package:', id);
+  const handleEdit = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3333/v1/localTourism/update/${id}`);
+      setplaces(places.filter((data) => data.id !== id));
+      console.log('Place updated successfully');
+    } catch (error) {
+      console.error('Error updating place:', error);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -57,9 +63,9 @@ const TourismPlaces = () => {
               <td className="border px-4 py-2">{data.placeName}</td>
               <td className="border px-4 py-2">{data.location}</td>
               <td className="border px-4 py-2">
-                {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded" onClick={() => handleEdit(data.id)}>
-                  Edit
-                </button> */}
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded" onClick={() => handleEdit(data.id)}>
+                  Approve
+                </button>
                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(data.id)}>
                   Delete
                 </button>
