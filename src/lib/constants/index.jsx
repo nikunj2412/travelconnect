@@ -46,7 +46,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		label: 'Rating',
 		path: '/rating',
 		icon: <MdOutlineReviews />
-	}
+	},
+	{
+		key: 'places',
+		label: 'Tourism Places',
+		path: '/places',
+		icon: <HiOutlineCube />
+	},
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

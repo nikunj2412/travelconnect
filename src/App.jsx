@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
 import AddPackage from "./pages/AddPackage";
 import TourPackage from "./pages/TourPackage";
+import TourismPlaces from "./pages/LocalTourismPlaces";
 import Rating from "./pages/Rating";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/add-packages" element={<AddPackage />} />
           <Route path="/packages" element={<TourPackage />} />
           <Route path="/rating" element={<Rating />} />
+          <Route path="/places" element={<TourismPlaces />} />
         </Route>
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
