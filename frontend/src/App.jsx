@@ -6,6 +6,7 @@ import About from './pages/About'
 import Destinations from './pages/Destinations'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import AddLocalTourism from './pages/AddLocalTourism'
 import Footer from './component/common/Footer'
 import Package from './pages/Package'
 import PackageDetail from './component/Destination/Packges/PackageDetail'
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/package/:id" element={<PackageDetail />} />
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/add-local-tourism-place" element={<AddLocalTourism/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
