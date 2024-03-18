@@ -38,6 +38,7 @@ const Header = () => {
             <li><Link to="/packages" onClick={closeMenu}>Packages</Link></li>
             <li><Link to="/signup" onClick={closeMenu}><button className="register-btn">Sign Up</button></Link></li>
             <li><Link to="/signin" onClick={closeMenu}><button className="login-btn">Login</button></Link></li>
+            <li><Link to="/add-local-tourism-place" onClick={closeMenu}>Add Local Tourism Place</Link></li>
           </ul>
         </div>
       </nav>
