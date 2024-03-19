@@ -10,6 +10,8 @@ const login = {
 
 const getAllUser = {};
 
+const getAllBooking = {};
+
 const getAllTravelPost = {};
 
 const create = {
@@ -67,5 +69,6 @@ module.exports = {
   updateTravelPost, 
   deleteTravelPostById,
   refreshTokens,
-  logout
+  logout,
+  getAllBooking
 }

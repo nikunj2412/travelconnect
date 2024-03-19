@@ -1,4 +1,4 @@
-const { userModel, travelModel, tokenModel } = require('../models');
+const { userModel, travelModel, tokenModel, bookingModel } = require('../models');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const bcrypt = require("bcrypt");
@@ -101,6 +101,11 @@ const resetPasswordToken = async (resetPasswordRequest) => {
     return userService.updateUser(filter, { password });
 };
 
+async function getAllBooking() {
+  const booking = await bookingModel.find();
+  return booking;
+}
+
 module.exports = {
     getAllUser,
     getAllTravelPost,
@@ -110,5 +115,6 @@ module.exports = {
     updateTravelPost,
     removeTravelPost,
     refreshAuth,
-    resetPasswordToken
+    resetPasswordToken,
+    getAllBooking
 }

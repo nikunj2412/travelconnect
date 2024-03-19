@@ -62,4 +62,9 @@ const logout = catchAsync(async (req, res) => {
   res.send({ results: { success: true } });
 });
 
-module.exports = {getAllUser,getAllTravelPost, login, create, get, update, remove, refreshTokens, logout}
+const getAllBooking = async (req, res) => {
+  const booking = await adminService.getAllBooking();
+  return res.send({ results: booking });
+};
+
+module.exports = {getAllUser,getAllTravelPost, login, create, get, update, remove, refreshTokens, logout, getAllBooking}

@@ -68,4 +68,11 @@ router
   
   .post(auth(), validate(adminValidation.logout), adminController.logout);
 
+router
+  .route('/getAllBookings')
+  /**
+   * getAllBookings
+   * */
+  .get(validate(adminValidation.getAllBooking), adminController.getAllBooking)
+
 module.exports = router;
