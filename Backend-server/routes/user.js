@@ -1,7 +1,7 @@
 const express = require('express')
 const { userValidation } = require('../validation');
 const auth = require('../middleware/auth')
-const { userController } = require('../controller');
+const { userController, adminController } = require('../controller');
 const validate = require('../middleware/validate');
 
 const router = express.Router();
@@ -32,5 +32,10 @@ router
    * deleteUser
    */
   .delete(validate(userValidation.deleteUserById), userController.remove);
+
+router
+  .route('/logout')
+  
+  .post(validate(userValidation.logout), adminController.logout);
 
 module.exports = router;

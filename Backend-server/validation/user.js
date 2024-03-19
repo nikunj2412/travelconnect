@@ -29,4 +29,10 @@ const deleteUserById = {
   }),
 };
 
-module.exports = {createUser, login, updateUser, deleteUserById}
+const logout = {
+  body: Joi.object().keys({
+    refreshToken: Joi.string().required(),
+  }),
+};
+
+module.exports = {createUser, login, updateUser, deleteUserById, logout}
