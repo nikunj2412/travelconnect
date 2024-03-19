@@ -35,4 +35,11 @@ router
      */
     .get(validate(ratingValidation.getAllRatings), ratingController.getAllRatings)
 
+router
+    .route('/getRatingForPackage/:postId')
+    /**
+     * ratingGiven
+     * */
+    .get(validate(ratingValidation.getRatingForPackage), ratingController.getRatingForPackage)
+
 module.exports = router;

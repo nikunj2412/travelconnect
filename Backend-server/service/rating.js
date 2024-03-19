@@ -74,9 +74,21 @@ async function getAllRatings(filter, limit) {
     return ratings;
 }
 
+async function getRatingForPackage(postId) {
+
+  const ratings = await ratingModel.find({postId: postId});
+  
+  if(!ratings) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Ratings not found for this post');
+  }
+
+  return ratings;
+}
+
 module.exports = {
   giveRating,
   ratingGiven,
   averageRating,
   getAllRatings,
+  getRatingForPackage
 };

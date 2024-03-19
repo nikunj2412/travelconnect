@@ -31,9 +31,16 @@ const getAllRatings = {
   }),
 };
 
+const getRatingForPackage = {
+  params: Joi.object().keys({
+      postId: Joi.objectId().required()
+    })
+};
+
 module.exports = {
     giveRating,
     ratingGiven,
     averageRating,
-    getAllRatings
+    getAllRatings,
+    getRatingForPackage
 }

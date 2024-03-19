@@ -32,10 +32,17 @@ const getAllRatings = catchAsync(async (req, res) => {
   return res.send({ results: rating });
 });
 
+const getRatingForPackage = async (req, res) => {
+  const { postId } = req.params;
+  const rating = await ratingService.getRatingForPackage(postId);
+  return res.send({ results: rating });
+};
+
 
 module.exports = {
     giveRating,
     ratingGiven,
     averageRating,
-    getAllRatings
+    getAllRatings,
+    getRatingForPackage
 }
