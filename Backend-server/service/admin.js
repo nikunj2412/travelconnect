@@ -1,4 +1,4 @@
-const { userModel, travelModel, tokenModel, bookingModel } = require('../models');
+const { userModel, travelModel, tokenModel, bookingModel, ratingModel } = require('../models');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const bcrypt = require("bcrypt");
@@ -102,9 +102,27 @@ const resetPasswordToken = async (resetPasswordRequest) => {
 };
 
 async function getAllBooking() {
-  const booking = await bookingModel.find();
-  return booking;
+  try {
+    const populatedBooking = await bookingModel.find()
+      .populate('postId', 'packageName')
+      .populate('userId', 'firstName lastName email');
+    return populatedBooking;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while populating booking');
+  }
 }
+
+async function getAllRatings() {
+  try {
+    const ratings = await ratingModel.find()
+      .populate('postId', 'packageName')
+      .populate('userRef', 'firstName lastName email');
+    return ratings;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while populating booking');
+  }
+}
+
 
 module.exports = {
     getAllUser,
@@ -116,5 +134,6 @@ module.exports = {
     removeTravelPost,
     refreshAuth,
     resetPasswordToken,
-    getAllBooking
+    getAllBooking,
+    getAllRatings
 }

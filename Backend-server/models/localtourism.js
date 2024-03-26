@@ -6,8 +6,6 @@ const localTourismSchema = new mongoose.Schema({
     placeDescription: { type: String },
     location: { type: String },
     placeActivity: { type: String },
-    inclusion: { type: String },
-    exclusion: { type: String },
     placeImages: {type: Array}, 
     approved: {type: Boolean, default: false}
 });

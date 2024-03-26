@@ -38,11 +38,21 @@ const getRatingForPackage = async (req, res) => {
   return res.send({ results: rating });
 };
 
+const removeRating = catchAsync(async (req, res) => {
+  const { ratingId } = req.params;
+  const filter = {
+    _id: ratingId,
+  };
+  const rating = await ratingService.removeRating(filter);
+  return res.send({ results: rating });
+});
+
 
 module.exports = {
     giveRating,
     ratingGiven,
     averageRating,
     getAllRatings,
-    getRatingForPackage
+    getRatingForPackage,
+    removeRating
 }

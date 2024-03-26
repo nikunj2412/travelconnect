@@ -85,10 +85,16 @@ async function getRatingForPackage(postId) {
   return ratings;
 }
 
+async function removeRating(filter) {
+  const rating = await ratingModel.findOneAndDelete(filter);
+  return rating;
+}
+
 module.exports = {
   giveRating,
   ratingGiven,
   averageRating,
   getAllRatings,
-  getRatingForPackage
+  getRatingForPackage,
+  removeRating
 };

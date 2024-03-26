@@ -67,4 +67,21 @@ const getAllBooking = async (req, res) => {
   return res.send({ results: booking });
 };
 
-module.exports = {getAllUser,getAllTravelPost, login, create, get, update, remove, refreshTokens, logout, getAllBooking}
+const getAllRatings = async (req, res) => {
+  const ratings = await adminService.getAllRatings();
+  return res.send({ results: ratings });
+};
+
+module.exports = {
+  getAllUser,
+  getAllTravelPost, 
+  login, 
+  create, 
+  get, 
+  update, 
+  remove, 
+  refreshTokens, 
+  logout, 
+  getAllBooking,
+  getAllRatings
+}

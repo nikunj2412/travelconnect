@@ -1,7 +1,7 @@
 const express = require('express')
-const { adminValidation } = require('../validation');
+const { adminValidation, ratingValidation, bookingValidation } = require('../validation');
 const auth = require('../middleware/auth')
-const { adminController } = require('../controller');
+const { adminController, ratingController, bookingController } = require('../controller');
 const validate = require('../middleware/validate');
 
 const router = express.Router();
@@ -74,5 +74,19 @@ router
    * getAllBookings
    * */
   .get(validate(adminValidation.getAllBooking), adminController.getAllBooking)
+
+router
+  .route('/getAllRatings')
+  /**
+   * getAllBookings
+   * */
+  .get(validate(adminValidation.getAllRating), adminController.getAllRatings)
+
+router
+  .route('/deleteRatingById/:ratingId')
+  /**
+   * deleteRatingById
+   * */
+  .delete(validate(ratingValidation.deleteRatingById), ratingController.removeRating)
 
 module.exports = router;

@@ -12,6 +12,8 @@ const getAllUser = {};
 
 const getAllBooking = {};
 
+const getAllRating = {};
+
 const getAllTravelPost = {};
 
 const create = {
@@ -70,5 +72,6 @@ module.exports = {
   deleteTravelPostById,
   refreshTokens,
   logout,
-  getAllBooking
+  getAllBooking,
+  getAllRating
 }

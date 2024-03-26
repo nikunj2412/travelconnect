@@ -37,10 +37,17 @@ const getRatingForPackage = {
     })
 };
 
+const deleteRatingById = {
+  params: Joi.object().keys({
+    ratingId: Joi.objectId().required(),
+  }),
+};
+
 module.exports = {
     giveRating,
     ratingGiven,
     averageRating,
     getAllRatings,
-    getRatingForPackage
+    getRatingForPackage,
+    deleteRatingById
 }
