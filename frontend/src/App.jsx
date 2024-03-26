@@ -10,6 +10,8 @@ import AddLocalTourism from './pages/AddLocalTourism'
 import Footer from './component/common/Footer'
 import Package from './pages/Package'
 import PackageDetail from './component/Destination/Packges/PackageDetail'
+import UserProfile from './pages/UserProfile'
+import Booking from './pages/Booking'
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
         <Route path="/destinations" element={<Destinations/>}/>
         <Route path="/packages" element={<Package/>}/>
         <Route path="/package/:id" element={<PackageDetail />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/booking/:id" element={<Booking />} />
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/add-local-tourism-place" element={<AddLocalTourism/>}/>

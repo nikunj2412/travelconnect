@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="nav-logo flex items-center gap-2">
           <img
             className="h-8"
-            src="public/assets/images/icons/logo.png"
+            src="/assets/images/icons/logo.png"
             alt="Travel Connect Logo"
           />
           <h1 className="font-semibold">

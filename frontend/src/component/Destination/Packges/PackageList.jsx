@@ -39,14 +39,11 @@ const PackageList = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
-      </div>
-      {/* ------------------------------------------------------------------------------- */}
       <div className="flex-1">
-        <h1 className="text-xl font-semibold border-b p-3 text-slate-700 mt-5">
-          Package Results:
+        <h1 className="text-xl text-center font-semibold border-b p-3 text-slate-700 mt-5">
+          List Of Packages
         </h1>
-        <div className="w-full p-5 flex flex-wrap gap-2">
+        <div className="w-full justify-center p-5 flex flex-wrap gap-2">
           {!loading && allPackages.length === 0 && (
             <p className="text-xl text-slate-700">No Packages Found!</p>
           )}

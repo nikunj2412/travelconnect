@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentUser: null,
+  loggedUser: null,
   error: null,
   loading: false,
+  refreshToken: null
 };
 
 const userSlice = createSlice({
@@ -14,9 +15,12 @@ const userSlice = createSlice({
       state.loading = true;
     },
     loginSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      state.loggedUser = action.payload;
       state.loading = false;
       state.error = null;
+    },
+    storeRefreshToken: (state,action) => {
+      state.refreshToken = action.payload;
     },
     loginFailure: (state, action) => {
       state.error = action.payload;
@@ -26,7 +30,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     updateUserSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      state.loggedUser = action.payload;
       state.loading = false;
       state.error = null;
     },
@@ -48,7 +52,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     logOutSuccess: (state) => {
-      state.currentUser = null;
+      state.loggedUser = null;
       state.loading = false;
       state.error = null;
     },
@@ -60,7 +64,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     deleteUserAccountSuccess: (state) => {
-      state.currentUser = null;
+      state.loggedUser = null;
       state.loading = false;
       state.error = null;
     },
@@ -74,6 +78,7 @@ const userSlice = createSlice({
 export const {
   loginStart,
   loginSuccess,
+  storeRefreshToken,
   loginFailure,
   updateUserStart,
   updateUserSuccess,

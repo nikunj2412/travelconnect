@@ -5,17 +5,33 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaArrowLeft, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import { LuCopy } from "react-icons/lu";
+import { useSelector } from "react-redux";
+import { Rating } from "@mui/material";
+import RatingCard from "./RatingCard";
+import { toast } from 'react-toastify';
+
 
 const Package = () => {
+  const { loggedUser } = useSelector((state) => state.user);
+  console.log("Logged User", loggedUser);
   const params = useParams();
   const navigate = useNavigate();
   const [packageData, setPackageData] = useState(null);
+  const [packageRatings, setPackageRatings] = useState([]);
+  const [checkRating, setCheckRating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-
+  const [reviewData, setReviewData] = useState({
+    rating: 0,
+    review: "",
+    postId: params?.id,
+    userRef: loggedUser?.id,
+    username: loggedUser?.firstName,
+    userProfileImg: loggedUser?.profileImg,
+  });
+  console.log("Pack data", packageData);
   const getPackageData = async () => {
     try {
       setLoading(true);
@@ -37,12 +53,81 @@ const Package = () => {
     }
   };
 
+  console.log("review Data ===", reviewData);
+
   useEffect(() => {
     if (params.id) {
       getPackageData();
+      getRatings();
     }
   }, [params.id]);
 
+  console.log("PR",packageRatings)
+  const getRatings = async () => {
+    try {
+      console.log(params.id)
+      const res = await fetch(`http://localhost:3333/v1/rating/getRatingForPackage/${params.id}`);
+      const data = await res.json();
+      if (data) {
+        setPackageRatings(data.data);
+      } else {
+        setPackageRatings("No ratings yet!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const checkRatingGiven = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:3333/v1/rating/ratingGiven/${loggedUser?.id}/${params?.id}`
+      );
+      const data = await res.json();
+      setCheckRating(data?.data?.flag);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleRating = async () => {
+    checkRatingGiven();
+    console.log("Checkrating", checkRating)
+    if(checkRating){
+      toast.warn("Already Submitted Rating");
+      return;
+    }
+    if (reviewData.rating === 0 && reviewData.review === "") {
+      toast.error("Atleast 1 field is required!");
+      return;
+    }
+    if (
+      reviewData.rating === 0 &&
+      reviewData.review === "" &&
+      !reviewData.userRef
+    ) {
+      alert("All fields are required!");
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:3333/v1/rating/giveRating", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reviewData),
+      });
+      const data = await res.json();
+      console.log("DATA", data);
+      if (data?.status === "Success") {
+        getRatings();
+        setReviewData({
+          rating: 0,
+          review: ""
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-full">
       {loading && (
@@ -97,21 +182,32 @@ const Package = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            {/* copy button */}
             <div className="w-full mx-auto flex flex-col justify-center p-5 max-w-6xl gap-2">
               <div className="flex flex-col">
                 <h2>Package Description</h2>
                 <p>{packageData?.packageDescription}</p>
               </div>
 
-              <div className="flex">
+              <div className="flex gap-7">
                 <div className="w-full flex flex-col mt-2">
-                  <h4 className="text-xl">Inclusion:</h4>
-                  <p>{packageData?.inclusion}</p>
+                  <h4 className="text-xl">Inclusions:</h4>
+                  <ul>
+                    {packageData?.inclusion.split(".").map((item, index) => (
+                      <li className="list-disc" key={index}>
+                        {item.trim()}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="w-full flex flex-col mt-2">
-                  <h4 className="text-xl">Exclusion:</h4>
-                  <p>{packageData?.exclusion}</p>
+                  <h4 className="text-xl">Exclusions:</h4>
+                  <ul>
+                    {packageData?.exclusion.split(".").map((item, index) => (
+                      <li className="list-disc" key={index}>
+                        {item.trim()}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
@@ -125,16 +221,80 @@ const Package = () => {
               </p>
 
               <div className="w-full flex justify-center sm:justify-normal">
-                <button
-                  type="button"
-                  onClick={() => {}}
-                  className="w-full sm:w-[200px] bg-green-700 text-white rounded p-3 hover:opacity-95"
-                >
-                  Book Now
-                </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (loggedUser) {
+                    navigate(`/booking/${params?.id}`);
+                  } else {
+                    navigate("/signin");
+                  }
+                }}
+                className="w-full sm:w-[200px] bg-green-700 text-white rounded p-3 hover:opacity-95"
+              >
+                Book Now
+              </button>
+            </div>
+
+              {/* give rating/review */}
+              <div className="w-full flex gap-4 flex-col mt-2 items-center">
+                {packageRatings && (
+                  <>
+                    <h4 className="text-xl">Rating :</h4>
+                    <Rating
+                      name="simple-controlled"
+                      className="w-max"
+                      value={reviewData?.rating}
+                      onChange={(e, data) => {
+                        setReviewData({
+                          ...reviewData,
+                          rating: data,
+                        });
+                      }}
+                    />
+                    <h4 className="text-xl">Post a Review :</h4>
+                    <textarea
+                      className="w-full resize-none p-3 border border-gray-500 rounded"
+                      rows={3}
+                      placeholder="Review"
+                      value={reviewData?.review}
+                      onChange={(e) => {
+                        setReviewData({
+                          ...reviewData,
+                          review: e.target.value,
+                        });
+                      }}
+                    ></textarea>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRating();
+                      }}
+                      className=" p-2 bg-green-700 text-white rounded disabled:opacity-80 hover:opacity-95"
+                    >
+                      Submit
+                    </button>
+                    <hr />
+                    <div className="mt-3 w-full flex flex-wrap justify-center gap-2 sm:justify-normal"></div>
+                  </>
+                )}
+
+                <div className="mt-3 w-full flex flex-col flex-wrap justify-center gap-2 sm:justify-normal">
+                  <RatingCard packageRatings={packageRatings} />
+                </div>
+                {(!loggedUser || loggedUser === null) && (
+                  <button
+                    onClick={() => {
+                      navigate("/signin");
+                    }}
+                    className="p-2 rounded text-white bg-green-700"
+                  >
+                    Rate Package
+                  </button>
+                )}
               </div>
-              <hr />
-              
+              {/* give rating/review */}
             </div>
           </div>
         </>
