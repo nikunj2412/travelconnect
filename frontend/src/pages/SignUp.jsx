@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required('First Name is required'),
@@ -30,10 +31,11 @@ const SignUp = () => {
           },
         }
         );
+        toast.success("User Created Successfully")
         console.log('API response:', response.data);
         resetForm();
       } catch (error) {
-        console.error('Error during API request:', error);
+        toast.error('Error during API request:', error);
       }
     },
   });

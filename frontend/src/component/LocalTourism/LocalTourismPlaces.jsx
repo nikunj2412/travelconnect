@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { IoLocation } from "react-icons/io5";
 
 const TourismPlaces = () => {
   const [places, setplaces] = useState([]);
@@ -18,6 +19,7 @@ const TourismPlaces = () => {
     fetchData();
   }, []);
 
+  console.log("palces",places)
 return (
   <>
   <h2 className="text-2xl md:text-4xl text-center mt-8 md:mt-12">Local Tourism Places</h2>
@@ -36,18 +38,23 @@ return (
               alt={localPlaces.placeName}
             />
             <div className="p-4">
-              <h3 className="text-gray-600 font-medium text-xl tracking-tight">
-                {localPlaces.placeName}
-              </h3>
-              <div className="flex items-center justify-between">
-                <a
-                  href="#"
-                  className="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                >
-                 View Details
-                </a>
+                <h3 className="text-gray-600 px-4 font-medium text-xl tracking-tight">
+                  {localPlaces.placeName}
+                </h3>
+                <div className="flex items-center justify-between">
+                  <div className='flex gap-2 items-center'>
+                <IoLocation/><span className="text-xl font-normal text-gray-900">
+                  {localPlaces.location}
+                  </span>
+                  </div>
+                  <a
+                    href="#"
+                    className="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                  >
+                   View Details
+                  </a>
+                </div>
               </div>
-            </div>
           </div>
         ))}
       </div>

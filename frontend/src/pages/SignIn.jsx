@@ -5,6 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../redux/user/userSlice.js";
+import { toast } from 'react-toastify';
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email address").required("Enter Email"),
@@ -13,6 +20,7 @@ const validationSchema = Yup.object({
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,14 +30,19 @@ const SignIn = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const response = await axios.post(
-          "http://localhost:3333/v1/user",
+          "http://localhost:3333/v1/user/userLogin",
           values
         );
-        if (response.status === 200) {
-          console.log("Authentication successful");
-          navigate('/')
+        if (response.data.status === "Success") {
+          toast.success("Authentication successful")
+          console.log("Authentication successful",response.data.data.user);
+          dispatch(loginSuccess(response?.data?.data?.user));
+          const refreshToken = response?.data?.data?.token?.refresh?.token;
+          console.log("Refresh Token", refreshToken)
+      // Dispatch action to store refresh token
+        navigate("/");
         } else {
-          console.error("Authentication failed");
+          toast.error("Authentication failed");
         }
         console.log("API Response", response.data);
         resetForm();
