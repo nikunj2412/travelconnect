@@ -17,6 +17,8 @@ const getAllNotApprovedTourismPost = {};
 
 const getAllApprovedTourismPost = {};
 
+const getAllTourismPost = {};
+
 const getLocalTourismPostById = {
     params: Joi.object().keys({
         localTourismId: Joi.objectId().required(),
@@ -41,5 +43,6 @@ module.exports = {
     getAllApprovedTourismPost,
     getLocalTourismPostById,
     updateLocalTourismPost,
-    deleteLocalTourismPost
+    deleteLocalTourismPost,
+    getAllTourismPost
 }

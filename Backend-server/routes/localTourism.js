@@ -26,6 +26,14 @@ router
    * */
   .get(validate(localTourismValidation.getAllApprovedTourismPost), localTourismController.getAllApprovedTourismPost)
 
+
+router
+  .route('/getAllTourismPost')
+  /**
+   * getAllTourismPost
+   * */
+  .get(validate(localTourismValidation.getAllTourismPost), localTourismController.getAllTourismPost)
+
 router
   .route('/getLocalTourismPost/:localTourismId')
   /**

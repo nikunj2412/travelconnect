@@ -17,6 +17,11 @@ const getAllApprovedTourismPost = async (req, res) => {
     return res.send({ results: localTourismPlace });
 };
 
+const getAllTourismPost = async (req, res) => {
+  const localTourismPlace = await localTourismService.getLocalTourismPost();
+  return res.send({ results: localTourismPlace });
+};
+
 const getLocalTourismPostById = async (req, res) => {
     const { localTourismId } = req.params;
     const filter = {
@@ -51,5 +56,6 @@ module.exports = {
     getAllApprovedTourismPost,
     getLocalTourismPostById,
     updateLocalTourismPost,
-    removeLocalTourismPost
+    removeLocalTourismPost,
+    getAllTourismPost
 }

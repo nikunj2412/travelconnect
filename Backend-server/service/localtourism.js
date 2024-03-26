@@ -17,6 +17,11 @@ async function getApprovedLocalTourismPost() {
   return alllocalTourismPlace;
 }
 
+async function getLocalTourismPost() {
+  const alllocalTourismPlace = localTourismModel.find()
+  return alllocalTourismPlace;
+}
+
 async function getLocalTourismPostById(id) {
   const localTourismPost = await localTourismModel.findById(id);
   return localTourismPost;
@@ -47,5 +52,6 @@ module.exports = {
     getApprovedLocalTourismPost,
     getLocalTourismPostById,
     updateLocalTourismPost,
-    removeLocalTourismPost
+    removeLocalTourismPost,
+    getLocalTourismPost
 }
