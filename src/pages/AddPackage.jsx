@@ -9,6 +9,8 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { toast } from 'react-toastify';
+
 
 const validationSchema = Yup.object({
   packageName: Yup.string().required("packageName is required"),
@@ -55,11 +57,10 @@ const AddPackage = () => {
             },
           }
         );
-        console.log("API response:", response.data);
+        toast.success("Package Added Successfully")
         resetForm();
       } catch (error) {
-        console.log("error===",error)
-        console.error("Error during API request:", error);
+        toast.error("Error during API request:", error);
       }
     },
   });
@@ -91,7 +92,6 @@ const AddPackage = () => {
 
     const handleImageSubmit = async () => {
         if (images.length === 0) {
-          // No images to upload
           return;
         }
       
@@ -110,7 +110,6 @@ const AddPackage = () => {
             })
           );
       
-          // Update form values with uploaded image URLs using Formik's setFieldValue
           urls.forEach((url) => {
             formik.setFieldValue('packageImages', [
               ...formik.values.packageImages,

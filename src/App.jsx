@@ -5,7 +5,10 @@ import Customers from "./pages/Customers";
 import AddPackage from "./pages/AddPackage";
 import TourPackage from "./pages/TourPackage";
 import TourismPlaces from "./pages/LocalTourismPlaces";
-import Rating from "./pages/Rating";
+import PackageRating from "./pages/PackageRating";
+import EditPackage from "./components/Packages/EditPackage";
+import Booking from "./pages/Booking";
+import UserRating from "./pages/UserRating";
 
 function App() {
   return (
@@ -16,8 +19,11 @@ function App() {
           <Route path="customers" element={<Customers />} />
           <Route path="/add-packages" element={<AddPackage />} />
           <Route path="/packages" element={<TourPackage />} />
-          <Route path="/rating" element={<Rating />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/rating" element={<UserRating />} />
           <Route path="/places" element={<TourismPlaces />} />
+          <Route path="/update-package/:id" element={<EditPackage />} />
+          <Route path="/package-rating" element={<PackageRating />} />
         </Route>
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
