@@ -42,9 +42,15 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 
 	},
 	{
-		key: 'rating',
-		label: 'Rating',
+		key: 'user-rating',
+		label: 'User Rating',
 		path: '/rating',
+		icon: <MdOutlineReviews />
+	},
+	{
+		key: 'package-rating',
+		label: 'Package Rating',
+		path: '/package-rating',
 		icon: <MdOutlineReviews />
 	},
 	{

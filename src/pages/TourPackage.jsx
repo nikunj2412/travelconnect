@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TourPackage = () => {
   const [packages, setPackages] = useState([]);
@@ -26,9 +28,9 @@ const TourPackage = () => {
     try {
       await axios.delete(`http://localhost:3333/v1/admin/delete/${id}`);
       setPackages(packages.filter((data) => data.id !== id));
-      console.log('Package deleted successfully');
+      toast.success('Package deleted successfully');
     } catch (error) {
-      console.error('Error deleting package:', error);
+      toast.error('Error deleting package:', error);
     }
   };
 
@@ -47,7 +49,7 @@ const TourPackage = () => {
         </thead>
         <tbody>
           {packages.map((data) => (
-            <tr key={data?._id}>
+            <tr key={data?.id}>
               <td className="border px-4 py-2">
                   <img
                     src={data?.packageImages[0]}
@@ -59,9 +61,11 @@ const TourPackage = () => {
               <td className="border px-4 py-2">${data.packagePrice}</td>
               <td className="border px-4 py-2">{data.location}</td>
               <td className="border px-4 py-2">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded" onClick={() => handleEdit(data.id)}>
+              <Link to={`/update-package/${data.id}`}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
                   Edit
                 </button>
+                </Link>
                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(data.id)}>
                   Delete
                 </button>

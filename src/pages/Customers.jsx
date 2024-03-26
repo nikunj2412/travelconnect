@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Customers = () => {
   const [users, setUsers] = useState([]);
@@ -22,11 +23,10 @@ const Customers = () => {
     try {
       console.log(userId)
       await axios.delete(`http://localhost:3333/v1/user/${userId}`);
-      // Filter out the deleted user from the state
       setUsers(users.filter(user => user.id !== userId));
-      console.log('User deleted successfully');
+      toast.success('User deleted successfully');
     } catch (error) {
-      console.error('Error deleting user:', error);
+      toast.error('Error deleting user:', error);
     }
   };
 
@@ -51,7 +51,7 @@ const Customers = () => {
               <td className="border border-gray-300 px-4 py-2">{user.lastName}</td>
               <td className="border border-gray-300 px-4 py-2">{user.email}</td>
               <td className="border border-gray-300 px-4 py-2">
-                <button className="text-red-500" onClick={() => handleDelete(user.id)}>Delete</button>
+                <button className="bg-red-600 text-white px-3 py-2 rounded-lg" onClick={() => handleDelete(user.id)}>Delete</button>
               </td>
             </tr>
           ))}
