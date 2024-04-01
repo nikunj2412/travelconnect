@@ -9,6 +9,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { toast } from 'react-toastify';
 
 const validationSchema = Yup.object({
   placeName: Yup.string().required("PlaceName is required"),
@@ -49,6 +50,7 @@ const AddLocalTourism = () => {
             },
           }
         );
+        toast.success("Place Added Successfully")
         console.log("API response:", response.data);
         resetForm();
       } catch (error) {

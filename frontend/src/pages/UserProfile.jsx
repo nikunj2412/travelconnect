@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     getDownloadURL,
     getStorage,
@@ -115,7 +115,9 @@ const UserProfile = () => {
   return (
     <>
     <div className="flex justify-end px-16">
-    <button className="px-4 mt-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-700 shadow-md focus:ring-2">Bookings</button>
+      <Link to={`/user-booking/${loggedUser.id}`}>
+    <button className="px-4 mt-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-700 shadow-md focus:ring-2" >Bookings</button>
+    </Link>
     </div>
       
       <div className="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">

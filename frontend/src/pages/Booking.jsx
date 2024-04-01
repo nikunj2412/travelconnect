@@ -3,6 +3,7 @@ import { FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Booking = () => {
   const { loggedUser } = useSelector((state) => state.user);
@@ -77,7 +78,7 @@ const Booking = () => {
       bookingData.person <= 0 ||
       bookingData.date === ""
     ) {
-      alert("All fields are required!");
+      toast.error("All fields are required!");
       return;
     }
     try {
@@ -90,6 +91,7 @@ const Booking = () => {
         body: JSON.stringify(bookingData),
       });
       const data = await res.json();
+      toast.success("successfully booked package")
       console.log("Bookkkk",data)
     } catch (error) {
       console.log(error);
