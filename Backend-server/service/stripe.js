@@ -1,0 +1,65 @@
+
+const STRIPE_SECRET_KEY = 'sk_test_51P2daDAfp9Qhk6qqyyMhh558MxFDYDj8YvCvh68eCidYdfb1akCfqyKC7yxXq4xEUF0e2A7B5s4qCYkc8FICjRK800W98alirN'
+
+const stripe = require('stripe')(STRIPE_SECRET_KEY)
+
+const createCustomer = async(body)=>{
+    try {
+        const {name, email} = body
+
+        const customer = await stripe.customers.create({
+            name: name,
+            email: email,
+        });
+
+        return customer;
+
+    } catch (err) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Payment Service Failed');
+    }
+
+}
+
+const addNewCard = async (body) => {
+    try {
+
+        const {token, customer_id} = body;
+
+        const card = await stripe.customers.createSource(customer_id, {
+            source: token
+        });
+
+        return card;
+    } catch (error) {
+        console.error('Error adding new card:', error.message);
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Card is not added');
+    }
+}
+
+const createCharges = async(body)=>{
+
+    try {
+        const {amount, card_id, customer_id} = body
+
+        const createCharge = await stripe.charges.create({
+            receipt_email: 'tester@gmail.com',
+            amount: parseInt(amount)*100,
+            currency:'CAD',
+            card: card_id,
+            customer: customer_id
+        });
+
+        return createCharge
+
+    } catch (error) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Charge is not created');
+    }
+
+}
+
+
+module.exports = {
+    createCustomer,
+    addNewCard,
+    createCharges
+}
