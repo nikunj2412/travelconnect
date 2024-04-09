@@ -30,7 +30,7 @@ console.log("PARAMs",params.id)
             setBookingDetails(bookingDetails.filter(bookingDetails => bookingDetails.id !== id));
           toast.success('Package Cancelled');
         } else {
-          toast.error('Failed to cancle package',{
+          toast.error('Failed to cancel package',{
             autoClose: 3000});
         }
       } catch (error) {
@@ -62,7 +62,7 @@ console.log("PARAMs",params.id)
               <td className="border border-gray-300 px-4 py-2">{booking.userId.email}</td>
               <td className="border border-gray-300 px-4 py-2">{new Date(booking.date).toLocaleDateString()}</td>
               <td className="border border-gray-300 px-4 py-2">
-                <button className="bg-red-600 text-white px-3 py-2 rounded-lg" onClick={() => handleDelete(booking.id)}>Cancle</button>
+                <button className="bg-red-600 text-white px-3 py-2 rounded-lg" onClick={() => handleDelete(booking.id)}>Cancel</button>
               </td>
             </tr>
           ))}

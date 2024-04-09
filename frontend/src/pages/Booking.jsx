@@ -75,10 +75,13 @@ const Booking = () => {
       bookingData.postId === "" ||
       bookingData.userId === "" ||
       bookingData.totalPrice <= 0 ||
-      bookingData.person <= 0 ||
-      bookingData.date === ""
+      bookingData.person <= 0
     ) {
       toast.error("All fields are required!");
+      return;
+    }
+    if(bookingData.date === null){
+      toast.error("Please select booking date");
       return;
     }
     try {
