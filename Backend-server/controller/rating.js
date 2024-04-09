@@ -19,7 +19,7 @@ const averageRating = catchAsync(async (req, res) => {
   const filter = {
     postId: postId,
   };
-  const rating = await ratingService.averageRating(filter);
+  const rating = await ratingService.averageRating(postId);
   return res.send({ results: rating });
 });
 

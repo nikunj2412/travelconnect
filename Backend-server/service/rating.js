@@ -45,8 +45,8 @@ async function ratingGiven(userId, postId) {
     return rating_given;
 }
 
-async function averageRating(filter) {
-    const ratings = await ratingModel.find(filter);
+async function averageRating(postId) {
+    const ratings = await ratingModel.find({postId: postId});
     if(!ratings.length){
         throw new ApiError(httpStatus.BAD_REQUEST, 'Ratings not found');
     }
@@ -60,6 +60,16 @@ async function averageRating(filter) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Average can not be calculated'); 
     }
 
+    await travelModel.findByIdAndUpdate(
+      postId,
+      {
+        $set: {
+          averageRating: average
+        },
+      },
+      { new: true }
+    );
+    
     return average;
 }
 
