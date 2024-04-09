@@ -23,8 +23,20 @@ const createCharge = {
     }),
 };
 
+const createSession = {
+    // body: Joi.object().keys({
+    //     amount: Joi.number(),
+    //     card_id: Joi.string(),
+    //     customer_id: Joi.string()
+    // }),
+    // body: Joi.object().keys({
+    //     // packages: Joi.array(),
+    // })
+};
+
 module.exports = {
     createCustomer,
     addNewCard,
-    createCharge
+    createCharge,
+    createSession
 }

@@ -57,9 +57,47 @@ const createCharges = async(body)=>{
 
 }
 
+const createSession = async(body) => {
+    try{
+    console.log("body====", body)
+    const { packages } = body;
+
+
+    const lineItems = packages.map((package)=>({
+        price_data:{
+            currency:"cad",
+            unit_amount:package.price * 100,
+            product_data: {
+                name: package.name,
+            }
+        },
+        quantity: package.person
+    }));
+
+
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types:["card"],
+        line_items:lineItems,
+        mode:"payment",
+        success_url:"https://example.com/success",
+        cancel_url:"https://example.com/cancel",
+    });
+
+    if(!session) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Session is not created');
+    }
+
+    return session;
+    }
+    catch(error){
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Error in Session creation');
+    }
+}
+
 
 module.exports = {
     createCustomer,
     addNewCard,
-    createCharges
+    createCharges,
+    createSession
 }

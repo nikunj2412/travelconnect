@@ -26,5 +26,12 @@ router
    * */
   .post(validate(stripeValidation.createCharge), stripeController.createCharges)
 
+router
+  .route('/createSession')
+  /**
+   * createSession
+   * */
+  .post(validate(stripeValidation.createSession), stripeController.createSession)
+
 
 module.exports = router;

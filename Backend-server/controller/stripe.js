@@ -19,8 +19,15 @@ const createCharges = catchAsync(async (req, res) => {
     return res.send({ results: charges });
 });
 
+const createSession = catchAsync(async (req, res) => {
+    const { body } = req;
+    const session = await stripeService.createSession(body);
+    return res.send({ results: session });
+})
+
 module.exports = {
     createCustomer,
     addCard,
-    createCharges
+    createCharges,
+    createSession
 }
