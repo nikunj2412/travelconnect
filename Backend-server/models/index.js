@@ -5,4 +5,5 @@ module.exports.tokenModel = require('./token')
 module.exports.ratingModel = require('./rating')
 module.exports.localTourismModel = require('./localtourism')
 module.exports.bookingModel = require('./booking')
+module.exports.contactusModel = require('./contactus')
 

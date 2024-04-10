@@ -59,7 +59,6 @@ const createCharges = async(body)=>{
 
 const createSession = async(body) => {
     try{
-    console.log("body====", body)
     const { packages } = body;
 
 

@@ -16,6 +16,8 @@ const getAllRating = {};
 
 const getAllTravelPost = {};
 
+const getAllContactus = {};
+
 const create = {
   body: Joi.object().keys({
     packageName: Joi.string(),
@@ -73,5 +75,6 @@ module.exports = {
   refreshTokens,
   logout,
   getAllBooking,
-  getAllRating
+  getAllRating,
+  getAllContactus
 }
