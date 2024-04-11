@@ -4,6 +4,7 @@ import Rating from "@mui/material/Rating";
 
 const PackageRating = () => {
   const [packages, setPackages] = useState([]);
+  const [averageRating, setaverageRating] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +14,10 @@ const PackageRating = () => {
         );
         setPackages(response.data.data);
         console.log(response.data.data);
+
+        const res = await axios.get(
+          "http://localhost:3333/v1/rating/averageRating/65ee31e4e5fddd84088502ea"
+        )
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -46,7 +51,7 @@ const PackageRating = () => {
               <td className="border px-4 py-2">
                   <Rating
                     name="half-rating-read"
-                    defaultValue={4.5}
+                    defaultValue={data?.packageRating}
                     precision={0.5}
                     readOnly
                   />

@@ -8,6 +8,7 @@ import {
 import { TbBrandBooking } from "react-icons/tb";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineReviews } from "react-icons/md";
+import { MdSupportAgent } from "react-icons/md";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -58,6 +59,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		label: 'Tourism Places',
 		path: '/places',
 		icon: <HiOutlineCube />
+	},
+	{
+		key: 'support',
+		label: 'Support',
+		path: '/support',
+		icon: <MdSupportAgent />
 	},
 ]
 

@@ -9,6 +9,7 @@ import PackageRating from "./pages/PackageRating";
 import EditPackage from "./components/Packages/EditPackage";
 import Booking from "./pages/Booking";
 import UserRating from "./pages/UserRating";
+import Support from "./pages/Support";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/places" element={<TourismPlaces />} />
           <Route path="/update-package/:id" element={<EditPackage />} />
           <Route path="/package-rating" element={<PackageRating />} />
+          <Route path="/support" element={<Support />} />
         </Route>
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
