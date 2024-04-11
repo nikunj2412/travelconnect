@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
@@ -42,13 +43,13 @@ const Footer = () => {
               <h2 className="mb-4 font-medium">About</h2>
               <ul>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="/about-us">About Us</a>
+                  <Link to="/about">About</Link>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="/features">Features</a>
+                  <Link to="/packages">Packages</Link>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="/contact-us">Contact Us</a>
+                  <Link to="/contact">Contact Us</Link>
                 </li>
               </ul>
             </div>
@@ -61,7 +62,7 @@ const Footer = () => {
                   <a href="#">Our Team</a>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
-                  <a href="#">FAQ</a>
+                <Link to="/about">About</Link>
                 </li>
                 <li className="mb-4 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white">
                   <a href="#">Blog</a>

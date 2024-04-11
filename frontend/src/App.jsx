@@ -13,6 +13,9 @@ import PackageDetail from './component/Destination/Packges/PackageDetail'
 import UserProfile from './pages/UserProfile'
 import Booking from './pages/Booking'
 import UserBooking from './pages/UserBooking'
+import Success from './component/payment/Success'
+import Cancel from './component/payment/Cancel'
+import ContactUs from './component/ContactUs'
 
 const App = () => {
   return (
@@ -30,6 +33,9 @@ const App = () => {
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/add-local-tourism-place" element={<AddLocalTourism/>}/>
+        <Route path="/success" element={<Success/>} />
+        <Route path="/cancel" element={<Cancel/>} />
+        <Route path="/contact" element={<ContactUs/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>

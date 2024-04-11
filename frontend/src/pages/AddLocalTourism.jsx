@@ -106,7 +106,6 @@ const AddLocalTourism = () => {
             })
           );
       
-          // Update form values with uploaded image URLs using Formik's setFieldValue
           urls.forEach((url) => {
             formik.setFieldValue('placeImages', [
               ...formik.values.placeImages,

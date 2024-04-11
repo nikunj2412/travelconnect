@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {loadStripe} from '@stripe/stripe-js';
 
 const Booking = () => {
   const { loggedUser } = useSelector((state) => state.user);
@@ -23,6 +24,7 @@ const Booking = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [carts,setCarts] = useState([]);
   const [bookingData, setBookingData] = useState({
     totalPrice: 0,
     postId: null,
@@ -54,25 +56,10 @@ const Booking = () => {
     }
   };
 
-  //   console.log("PACKAGEDATA",packageData)
+  const handlePayment = async () => {
 
-  //get paymentgateway token
-  //   const getToken = async () => {
-  //     try {
-  //       const { data } = await axios.get(`/api/package/braintree/token`);
-  //       setClientToken(data?.clientToken);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     getToken();
-  //   }, [loggedUser]);
-
-  //handle payment & book package
-  const handleBookPackage = async () => {
     if (
-      bookingData.postId === "" ||
+      bookingData.postId === "" ||  
       bookingData.userId === "" ||
       bookingData.totalPrice <= 0 ||
       bookingData.person <= 0
@@ -95,12 +82,89 @@ const Booking = () => {
       });
       const data = await res.json();
       toast.success("successfully booked package")
-      console.log("Bookkkk",data)
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+       // Update carts with the latest booking details
+       setCarts([
+        ...carts,
+        {
+          price: packageData.packagePrice,
+          name: packageData.packageName,
+          person: bookingData.person,
+        }
+      ]);
+
+      console.log("Booked item added to carts:", carts);
+    const stripe = await loadStripe('pk_test_51P2daDAfp9Qhk6qquNkABsDPTjfwmnVDBJRPulPNeYc29o2TeKFXfdbEoiwSQm2Q7RxPdR9yKXTpDVhPZdZSEzyz00Hs8434Jp');
+    const body = {
+      packages : carts
+  }
+  const headers = {
+      "Content-Type":"application/json"
+  }
+  const response = await fetch("http://localhost:3333/v1/stripe/createSession",{
+      method:"POST",
+      headers:headers,
+      body:JSON.stringify(body)
+  });
+
+
+
+  const session = await response.json();
+
+  console.log("session",session)
+  const result = stripe.redirectToCheckout({
+      sessionId:session.data.id
+  });
+  
+  if(result.error){
+      console.log(result.error);
+  }
+  } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     }
-  };
+
+  // const handleBookPackage = async () => {
+  //   if (
+  //     bookingData.postId === "" ||  
+  //     bookingData.userId === "" ||
+  //     bookingData.totalPrice <= 0 ||
+  //     bookingData.person <= 0
+  //   ) {
+  //     toast.error("All fields are required!");
+  //     return;
+  //   }
+  //   if(bookingData.date === null){
+  //     toast.error("Please select booking date");
+  //     return;
+  //   }
+  //   try {
+  //     setLoading(true);
+  //     const res = await fetch(`http://localhost:3333/v1/booking/createBooking`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(bookingData),
+  //     });
+  //     const data = await res.json();
+  //     toast.success("successfully booked package")
+  //     setCarts([
+  //       ...carts,
+  //       {
+  //         price: bookingData.totalPrice,
+  //         name: packageData.packageName,
+  //         person: bookingData.person,
+  //       }
+  //     ]);
+
+  //     console.log("Booked item added to carts:", carts);
+  //     console.log("Bookkkk",data)
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (params?.id) {
@@ -122,9 +186,18 @@ const Booking = () => {
           ? packageData?.packageDiscountPrice * bookingData?.person
           : packageData?.packagePrice * bookingData?.person,
       });
-    }
-  }, [packageData, params]);
 
+      setCarts([
+        {
+          price: packageData.packagePrice,
+          name: packageData.packageName,
+          person: bookingData.person,
+        }
+      ]);
+    }
+  }, [packageData, params,bookingData.totalPrice]);
+
+  console.log("CARTS",carts)
   return (
     <div className="w-full flex flex-col items-center">
       <div className="w-[95%] flex flex-col items-center p-6 rounded shadow-2xl gap-3">
@@ -212,7 +285,7 @@ const Booking = () => {
                 />
               </div>
               {/* price */}
-              <p className="flex gap-1 text-xl font-semibold my-1">
+              <p className="flex text-xl font-semibold my-1 items-center gap-4">
                 Price:
                 {packageData.packageOffer ? (
                   <>
@@ -237,6 +310,8 @@ const Booking = () => {
                 )}
               </p>
               {/* price */}
+              <div className="flex text-xl items-center gap-4 font-semibold my-1">
+                Person:
               <div className="flex border-2 w-max">
                 <button
                   className="p-2 py-1 font-semibold"
@@ -279,7 +354,8 @@ const Booking = () => {
                   +
                 </button>
               </div>
-              <p className="text-xl font-semibold">
+              </div>
+              <p className="flex text-xl font-semibold items-center gap-4">
                 Total Price:
                 <span className="text-green-700">
                   $
@@ -289,10 +365,15 @@ const Booking = () => {
                 </span>
               </p>
               <div>
-          <button 
+          {/* <button 
            onClick={handleBookPackage}
           className="w-full px-4 mt-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-700 shadow-md focus:ring-2">
-            Proceed
+           Booking
+          </button> */}
+          <button 
+           onClick={handlePayment}
+          className="w-full px-4 mt-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-700 shadow-md focus:ring-2">
+            Check Out
           </button>
         </div>
             </div>

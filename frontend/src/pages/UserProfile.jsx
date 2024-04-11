@@ -100,13 +100,12 @@ const UserProfile = () => {
         method: "POST"
       });
       const data = await res.json();
-      dispatch(logOutSuccess()); // Dispatch the action to indicate successful logout (optional)
+      dispatch(logOutSuccess());
       toast.success("You Logout Successfully")
-      navigate("/signin"); // Redirect to the signin page or any other appropriate route
-       // Display a success message or handle errors
+      // Redirect to the signin page 
+      navigate("/signin"); 
     } catch (error) {
       console.log(error);
-      // Handle errors, such as network issues or server errors
     }
   };
   

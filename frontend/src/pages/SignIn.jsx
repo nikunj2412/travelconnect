@@ -39,7 +39,6 @@ const SignIn = () => {
           dispatch(loginSuccess(response?.data?.data?.user));
           const refreshToken = response?.data?.data?.token?.refresh?.token;
           console.log("Refresh Token", refreshToken)
-      // Dispatch action to store refresh token
         navigate("/");
         } else {
           toast.error("Authentication failed");

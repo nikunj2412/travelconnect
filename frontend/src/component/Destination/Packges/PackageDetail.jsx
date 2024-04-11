@@ -118,6 +118,7 @@ const Package = () => {
       const data = await res.json();
       console.log("DATA", data);
       if (data?.status === "Success") {
+        toast.success("Review Added");
         getRatings();
         setReviewData({
           rating: 0,
@@ -137,10 +138,11 @@ const Package = () => {
       )}
       {packageData && !loading && !error && (
         <>
-          <div className="flex items-center justify-center p-4">
+          <div className="flex flex-col items-center justify-center p-4">
             <p className="text-2xl text-center font-bold capitalize">
               {packageData?.packageName}
             </p>
+            <div className="flex items-center justify-center ">
             <p className="flex items-center mx-4">
               {packageData?.packageDays} Days / {packageData?.packageNights}{" "}
               Nights
@@ -162,6 +164,8 @@ const Package = () => {
                 Link copied!
               </p>
             )}
+            </div>
+            
           </div>
 
           <div className="w-full">
@@ -188,7 +192,7 @@ const Package = () => {
                 <p>{packageData?.packageDescription}</p>
               </div>
 
-              <div className="flex gap-7">
+              <div className="flex flex-col gap-4 md:flex-row md:gap-7">
                 <div className="w-full flex flex-col mt-2">
                   <h4 className="text-xl">Inclusions:</h4>
                   <ul>

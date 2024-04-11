@@ -1,9 +1,10 @@
-// import { Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FaClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const PackageCard = ({ packageData }) => {
+  const { packageName } = packageData;
+  const truncatedName = packageName.length > 26 ? `${packageName.substring(0, 26)}...` : packageName;
   return (
     <Link to={`/package/${packageData.id}`} className="w-max">
       <div className="bg-white border flex flex-col items-center p-3 rounded shadow-md overflow-hidden">
@@ -14,11 +15,9 @@ const PackageCard = ({ packageData }) => {
         />
         <div className="w-full flex flex-col my-2">
           <p className="font-semibold text-lg capitalize w-[90%] xsm:w-[250px]">
-            {packageData.packageName}
+          {truncatedName}
           </p>
-          <p className="text-green-700 text-lg capitalize">
-            {packageData.packageDestination}
-          </p>
+          <div className="flex items-center justify-between">
           {(+packageData.packageDays > 0 || +packageData.packageNights > 0) && (
             <p className="flex text-lg items-center gap-2">
               <FaClock />
@@ -35,6 +34,9 @@ const PackageCard = ({ packageData }) => {
                   : packageData.packageNights + " Night")}
             </p>
           )}
+          <span>&#36;{packageData.packagePrice}</span>
+          </div>
+          
         </div>
       </div>
     </Link>

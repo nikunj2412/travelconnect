@@ -6,7 +6,7 @@ import { FaRoute } from "react-icons/fa";
 
 const Features = () => {
   return (
-    <div className="flex sm:items-center my-10 mx-auto sm:px-9 flex-col sm:flex-row ">
+    <div className="flex sm:items-center my-14 mx-auto sm:px-9 flex-col sm:flex-row ">
       <div className="feature-detail">
         <div className="flex items-center gap-2 text-orange-600 text-2xl">
           <h4 className="text-xl font-extrabold leading-8 tracking-tight text-orange-600  sm:leading-9">
