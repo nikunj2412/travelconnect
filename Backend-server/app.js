@@ -7,6 +7,7 @@ const cors = require('cors');
 const sendResponse = require('./middleware/sendResponse');
 const { errorConverter, errorHandler } = require('./middleware/error');
 const path = require('path');
+require("dotenv").config();
 // const session = require('express-session');
 
 const app = express();
@@ -19,9 +20,10 @@ const app = express();
 //   })
 // );
 
+console.log("url", process.env.MONGO_URL)
 
 mongoose.connect(
-  "mongodb+srv://anghann29:Nikunj@cluster0.b3maiqj.mongodb.net/TravelConnect?retryWrites=true&w=majority",
+  process.env.MONGO_URL || "mongodb+srv://anghann29:Nikunj@cluster0.b3maiqj.mongodb.net/TravelConnect?retryWrites=true&w=majority",
   { useNewUrlParser: true }
 );
 
@@ -44,7 +46,7 @@ app.use(errorConverter);
 // handle error
 app.use(errorHandler);
 
-app.listen(3333,()=>{
+app.listen(process.env.PORT || 3333,()=>{
 
     console.log("**** Server is listening at port 3333 !!!! ***")
 })

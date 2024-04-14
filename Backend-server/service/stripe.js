@@ -1,5 +1,5 @@
-
-const STRIPE_SECRET_KEY = 'sk_test_51P2daDAfp9Qhk6qqyyMhh558MxFDYDj8YvCvh68eCidYdfb1akCfqyKC7yxXq4xEUF0e2A7B5s4qCYkc8FICjRK800W98alirN'
+require("dotenv").config();
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || 'sk_test_51P2daDAfp9Qhk6qqyyMhh558MxFDYDj8YvCvh68eCidYdfb1akCfqyKC7yxXq4xEUF0e2A7B5s4qCYkc8FICjRK800W98alirN'
 
 const stripe = require('stripe')(STRIPE_SECRET_KEY)
 

@@ -5,12 +5,14 @@ const httpStatus = require('http-status');
 const { userModel, tokenModel } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { userService } = require('../service')
+require("dotenv").config();
 
-const JWT_SECRET = 'QDw^d2+qu/!2?~Uf';
-const resetPasswordExpirationMinutes = 30;
-const resetPasswordCodeSize = 6;
-const accessExpirationMinutes = 30;
-const refreshExpirationDays = 30;
+
+const JWT_SECRET = process.env.PASSPORT_SECRET_KEY || 'QDw^d2+qu/!2?~Uf';
+const resetPasswordExpirationMinutes = process.env.RESET_PASSWORD_EXPIRATION_MINUTES || 30;
+const resetPasswordCodeSize = process.env.RESET_PASSWORD_CODE_SIZE || 6;
+const accessExpirationMinutes = process.env.ACCESS_EXPIRATION_MINUTES || 30;
+const refreshExpirationDays = process.env.REFRESH_EXPIRATION_DAYS || 30;
 
 const generateToken = (userId, expires, secret = JWT_SECRET) => {
   const payload = {
