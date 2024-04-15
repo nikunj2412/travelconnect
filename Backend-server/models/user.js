@@ -1,23 +1,38 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcrypt");
+const toJSON = require('./plugins/toJSON.plugin')
 
 const userSchema = new mongoose.Schema({
     firstName: {type: String},
     lastName: {type: String},
     email: {type: String},
-    dateOfBirth: {
+    address: {
       type: String
     },
     password: {
       type: String,
       private: true,
     },
+    mobileNumber: {
+      type: String
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
 });
+
+userSchema.plugin(toJSON);
+
+userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
+  const User = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  return !!User;
+};
   
 userSchema.pre('save', async function (next) {
     const User = this;
     if (User.isModified('password')) {
-      User.password = await bcrypt.hash(User.password, 8);
+      User.password = await bcrypt.hash(User.password, 10);
     }
     next();
 });
