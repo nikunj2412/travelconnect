@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const Success = () => {
+  useEffect(() => {
+    toast.success("Payment Received Successfully");
+  }, []); 
+
   return (
     <>
-    <h2>Payment Successful!</h2>
-      <p>Thank you for your purchase.</p>
-      </>
-  )
-}
+      
+    </>
+  );
+};
 
-export default Success
-
-
+export default Success;

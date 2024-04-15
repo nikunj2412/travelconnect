@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const Cancel = () => {
-  return (
-    <div>
-        <h2>Payment Canceled or Failed</h2>
-      <p>Please try again later.</p>
-    </div>
-  )
-}
+  useEffect(() => {
+    toast.error("Payment Failed !! Try Again");
+  }, []); 
 
-export default Cancel
+  return (
+    <>
+      
+    </>
+  );
+};
+
+export default Cancel;
