@@ -28,6 +28,8 @@ router
   .put(
   validate(userValidation.updateUser), 
   userController.update)
+
+router.route('/delete/:userId')
   /**
    * deleteUser
    */
