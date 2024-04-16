@@ -94,7 +94,7 @@ const Booking = () => {
       ]);
 
       console.log("Booked item added to carts:", carts);
-    const stripe = await loadStripe('pk_test_51P2daDAfp9Qhk6qquNkABsDPTjfwmnVDBJRPulPNeYc29o2TeKFXfdbEoiwSQm2Q7RxPdR9yKXTpDVhPZdZSEzyz00Hs8434Jp');
+    const stripe = await loadStripe(`${import.meta.env.VITE_PAYMENT_KEY}`);
     const body = {
       packages : carts
   }
