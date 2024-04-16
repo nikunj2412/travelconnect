@@ -48,8 +48,9 @@ const AddPackage = () => {
     onSubmit: async (values, { resetForm }) => {
       console.log("Values===", values);
       try {
+        let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
         const response = await axios.post(
-            "http://localhost:3333/v1/admin/create",
+            `${apiUrl}/v1/admin/create`,
           values,
           {
             headers: {

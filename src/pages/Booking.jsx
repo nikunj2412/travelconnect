@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 const Booking = () => {
   const [bookings, setBookings] = useState([]);
 
@@ -7,7 +6,7 @@ const Booking = () => {
     // Fetch booking data from API
     const fetchBookings = async () => {
       try {
-        const response = await fetch('http://localhost:3333/v1/admin/getAllBookings');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/admin/getAllBookings`);
         const data = await response.json();
         setBookings(data.data);
       } catch (error) {

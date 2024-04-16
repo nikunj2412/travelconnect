@@ -31,9 +31,11 @@ const EditPackage = () => {
       inclusion: "",
       exclusion: "",
     })
+    let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+
     const getPackageData = async () => {
         try {
-          const res = await fetch(`http://localhost:3333/v1/admin/post/${params?.id}`);
+          const res = await fetch(`${apiUrl}/v1/admin/post/${params?.id}`);
           const {data} = await res.json();
           console.log("data",data)
           if (data) {
@@ -147,8 +149,7 @@ const EditPackage = () => {
         try {
           setLoading(true);
           setError(false);
-    
-          const res = await fetch(`http://localhost:3333/v1/admin/update/${params?.id}`, {
+          const res = await fetch(`${apiUrl}/v1/admin/update/${params?.id}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

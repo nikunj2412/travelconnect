@@ -4,16 +4,17 @@ import axios from 'axios';
 const TourismPlaces = () => {
   const [places, setPlaces] = useState([]);
   const [approvedPlaces, setApprovedPlaces] = useState([]);
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch non-approved tourism places
-        const nonApprovedResponse = await axios.get('http://localhost:3333/v1/localTourism/getAllNotApprovedTourismPost');
+        const nonApprovedResponse = await axios.get(`${import.meta.env.VITE_API_URL}/v1/localTourism/getAllNotApprovedTourismPost`);
         setPlaces(nonApprovedResponse.data.data);
 
         // Fetch approved tourism places
-        const approvedResponse = await axios.get('http://localhost:3333/v1/localTourism/getAllApprovedTourismPost');
+        const approvedResponse = await axios.get(`${import.meta.env.VITE_API_URL}/v1/localTourism/getAllApprovedTourismPost`);
         setApprovedPlaces(approvedResponse.data.data);
 
         console.log('Non-approved places:', nonApprovedResponse.data.data);
@@ -28,7 +29,7 @@ const TourismPlaces = () => {
 
   const handleEdit = async (id) => {
     try {
-      await axios.put(`http://localhost:3333/v1/localTourism/update/${id}`, { approved: true });
+      await axios.put(`${apiUrl}/v1/localTourism/update/${id}`, { approved: true });
       setPlaces(places.filter((data) => data.id !== id));
       console.log('Place updated successfully', places);
     } catch (error) {
@@ -38,7 +39,7 @@ const TourismPlaces = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3333/v1/localTourism/delete/${id}`);
+      await axios.delete(`${apiUrl}/v1/localTourism/delete/${id}`);
       setPlaces(places.filter((data) => data.id !== id));
       console.log('Place deleted successfully');
     } catch (error) {
@@ -47,7 +48,7 @@ const TourismPlaces = () => {
   };
   const handleApprovedPlaceDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3333/v1/localTourism/delete/${id}`);
+      await axios.delete(`${apiUrl}/v1/localTourism/delete/${id}`);
       setApprovedPlaces(approvedPlaces.filter((data) => data.id !== id)); // Update approvedPlaces state after deletion
       console.log('Approved place deleted successfully');
     } catch (error) {

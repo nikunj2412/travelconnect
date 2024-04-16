@@ -5,19 +5,16 @@ import Rating from "@mui/material/Rating";
 const PackageRating = () => {
   const [packages, setPackages] = useState([]);
   const [averageRating, setaverageRating] = useState();
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3333/v1/admin/travel-posts"
+          `${apiUrl}/v1/admin/travel-posts`
         );
         setPackages(response.data.data);
         console.log(response.data.data);
-
-        const res = await axios.get(
-          "http://localhost:3333/v1/rating/averageRating/65ee31e4e5fddd84088502ea"
-        )
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -4,11 +4,12 @@ import { toast } from 'react-toastify';
 
 const UserRating = () => {
   const [ratings, setRatings] = useState([]);
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const response = await fetch('http://localhost:3333/v1/admin/getAllRatings');
+        const response = await fetch(`${apiUrl}/v1/admin/getAllRatings`); 
         const data = await response.json();
         setRatings(data.data);
       } catch (error) {
@@ -21,7 +22,7 @@ const UserRating = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3333/v1/admin/deleteRatingById/${id}`, {
+      const response = await fetch(`${apiUrl}/v1/admin/deleteRatingById/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {

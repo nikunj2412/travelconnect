@@ -11,7 +11,7 @@ const Support = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3333/v1/admin/getAllContactUs');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/v1/admin/getAllContactUs`);
       console.log(response.data.data)
       setUsers(response.data.data);
     } catch (error) {

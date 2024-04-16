@@ -11,7 +11,7 @@ const Customers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3333/v1/admin/');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/v1/admin/`);
       console.log(response.data.data)
       setUsers(response.data.data);
     } catch (error) {
@@ -21,8 +21,8 @@ const Customers = () => {
 
   const handleDelete = async (userId) => {
     try {
-      console.log(userId)
-      await axios.delete(`http://localhost:3333/v1/user/${userId}`);
+      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+      await axios.delete(`${apiUrl}/v1/user/${userId}`);
       setUsers(users.filter(user => user.id !== userId));
       toast.success('User deleted successfully');
     } catch (error) {
