@@ -60,7 +60,6 @@ const createCharges = async(body)=>{
 const createSession = async(body) => {
     try{
     const { packages } = body;
-        console.log("packages",packages)
 
     const lineItems = packages.map((package)=>({
         price_data:{
@@ -73,13 +72,12 @@ const createSession = async(body) => {
         quantity: package.person
     }));
 
-console.log("line items",lineItems)
     const session = await stripe.checkout.sessions.create({
         payment_method_types:["card"],
         line_items:lineItems,
         mode:"payment",
-        success_url:"https://travelconnect.vercel.app/success",
-        cancel_url:"https://travelconnect.vercel.app/cancel",
+        success_url:"https://travelconnect.vercel.app",
+        cancel_url:"https://travelconnect.vercel.app",
     });
 
     if(!session) {
