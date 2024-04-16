@@ -38,9 +38,9 @@ async function giveRating(body) {
 async function ratingGiven(userId, postId) {
     const rating_given = await ratingModel.findOne({userRef: userId, postId: postId});
 
-    if(!rating_given){
-        throw new ApiError(httpStatus.BAD_REQUEST, 'there is no rating for this post');
-    }
+    // if(!rating_given){
+    //     throw new ApiError(httpStatus.BAD_REQUEST, 'there is no rating for this post');
+    // }
 
     return rating_given;
 }

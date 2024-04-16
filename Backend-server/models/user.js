@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
       type: Boolean,
       default: false
+    },
+    profileImg: {
+      type: String,
+      default: "https://firebasestorage.googleapis.com/v0/b/react-auth-83398.appspot.com/o/user.jpg?alt=media&token=50c5fcc1-4a08-4b0f-9b3b-818243e384a2"
     }
 });
 
