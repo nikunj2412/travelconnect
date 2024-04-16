@@ -11,7 +11,8 @@ const giveRating = catchAsync(async (req, res) => {
 const ratingGiven = async (req, res) => {
     const { userId, postId } = req.params;
     const rating = await ratingService.ratingGiven(userId, postId);
-    return res.send({ results: rating });
+    // const flag = true;
+    return res.send({ results: {rating, flag: true }});
 };
 
 const averageRating = catchAsync(async (req, res) => {
