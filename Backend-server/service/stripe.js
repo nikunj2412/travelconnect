@@ -78,8 +78,8 @@ const createSession = async(body) => {
         payment_method_types:["card"],
         line_items:lineItems,
         mode:"payment",
-        success_url:"https://example.com/success",
-        cancel_url:"https://example.com/cancel",
+        success_url:"https://travelconnect.vercel.app/success",
+        cancel_url:"https://travelconnect.vercel.app/cancel",
     });
 
     if(!session) {
