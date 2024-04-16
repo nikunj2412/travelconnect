@@ -1,6 +1,6 @@
 import React from "react";
 import { BsDashLg } from "react-icons/bs";
-
+import romeImg from '../../../public/assets/images/rome.jpg';
 const About = () => {
   return (
     <div className="relative p-4 dark:bg-gray-800">
@@ -49,7 +49,7 @@ const About = () => {
         </div>
         <div className="relative mt-10 -mx-4 md:-mx-12 lg:mt-0 md:col-start-1">
           <img
-            src="public/assets/images/rome.jpg"
+            src={romeImg}
             alt="illustration"
             className="relative mx-auto rounded shadow-lg w-full md:w-56 lg:w-72"
           />

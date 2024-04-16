@@ -24,13 +24,13 @@ const data = [{
 },
 {
     id: 5,
-    imageUrl: 'public/assets/images/destination/thailand.jpg',
+    imageUrl: 'assets/images/destination/thailand.jpg',
     name: 'Thailand',
     price: 1300
 },
 {
     id: 6,
-    imageUrl: 'public/assets/images/destination/udaipur.jpg',
+    imageUrl: 'assets/images/destination/udaipur.jpg',
     name: 'Udaipur',
     price: 800
 }
