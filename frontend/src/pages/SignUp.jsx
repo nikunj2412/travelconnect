@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import loginBg from '../../public/assets/images/login-bg.png';
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required('First Name is required'),
@@ -47,7 +48,7 @@ const SignUp = () => {
     <div className="w-1/2 shadow-xl">
     <img
       className="hidden md:w-3/5 md:mx-auto md:object-contain h-screen md:block"
-      src="public/assets/images/login-bg.png"
+      src={loginBg}
     />
   </div>
   <div className="flex flex-col w-full md:w-1/2">

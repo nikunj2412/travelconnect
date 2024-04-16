@@ -12,6 +12,7 @@ import {
   loginFailure,
 } from "../redux/user/userSlice.js";
 import { toast } from 'react-toastify';
+import loginBg from '../../public/assets/images/login-bg.png';
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email address").required("Enter Email"),
@@ -57,7 +58,7 @@ const SignIn = () => {
       <div className="w-1/2 shadow-2xl">
         <img
           className="hidden md:w-3/5 md:mx-auto md:object-contain h-screen md:block"
-          src="public/assets/images/login-bg.png"
+          src={loginBg}
         />
       </div>
       <div className="flex flex-col w-full md:w-1/2">

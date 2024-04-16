@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-
+import logo from '../../../public/assets/images/icons/logo.png'
 const Footer = () => {
   return (
     <footer className="bg-slate-100 pt-4 pb-8 xl:pt-8">
@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="nav-logo flex items-center gap-2">
           <img
             className="h-8"
-            src="/assets/images/icons/logo.png"
+            src={logo}
             alt="Travel Connect Logo"
           />
           <h1 className="font-semibold">

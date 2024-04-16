@@ -1,5 +1,9 @@
 import React from "react";
 import { PiAirplaneTakeoffBold } from "react-icons/pi";
+import parashoot from '../../../public/assets/images/parashoot.jpg';
+import lagoon from '../../../public/assets/images/lagoon.jpg';
+import bali from '../../../public/assets/images/bali.jpg';
+import mountain from '../../../public/assets/images/mountain.jpg';
 
 const HeroBanner = () => {
   return (
@@ -28,13 +32,13 @@ const HeroBanner = () => {
           <img
             className="w-24 lg:w-52 rounded-lg shadow-lg"
             width="200"
-            src="public/assets/images/parashoot.jpg"
+            src={parashoot}
             alt="1"
           />
           <img
             className="w-32 lg:w-64 rounded-lg shadow-lg"
             width="260"
-            src="public/assets/images/lagoon.jpg"
+            src={lagoon}
             alt="2"
           />
         </div>
@@ -42,13 +46,13 @@ const HeroBanner = () => {
           <img
             className="w-32 lg:w-56 rounded-lg shadow-lg"
             width="170"
-            src="public/assets/images/bali.jpg"
+            src={bali}
             alt="3"
           />
           <img
             className="w-32 lg:w-52 rounded-lg shadow-lg"
             width="200"
-            src="public/assets/images/mountain.jpg"
+            src={mountain}
             alt="4"
           />
         </div>
