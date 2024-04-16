@@ -33,12 +33,13 @@ const Booking = () => {
     date: null,
   });
   const [currentDate, setCurrentDate] = useState("");
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   console.log("BookingData",bookingData)
   const getPackageData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3333/v1/admin/post/${params?.id}`
+        `${apiUrl}/v1/admin/post/${params?.id}`
       );
       const data = await res.json();
       console.log("DATA", data);
@@ -73,7 +74,7 @@ const Booking = () => {
     }
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3333/v1/booking/createBooking`, {
+      const res = await fetch(`${apiUrl}/v1/booking/createBooking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +101,7 @@ const Booking = () => {
   const headers = {
       "Content-Type":"application/json"
   }
-  const response = await fetch("http://localhost:3333/v1/stripe/createSession",{
+  const response = await fetch(`${apiUrl}/v1/stripe/createSession`,{
       method:"POST",
       headers:headers,
       body:JSON.stringify(body)

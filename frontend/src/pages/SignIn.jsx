@@ -29,8 +29,9 @@ const SignIn = () => {
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
+      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
         const response = await axios.post(
-          "http://localhost:3333/v1/user/userLogin",
+          `${apiUrl}/v1/user/userLogin`,
           values
         );
         if (response.data.status === "Success") {

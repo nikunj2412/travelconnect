@@ -24,7 +24,8 @@ const SignUp = () => {
     validationSchema: validationSchema,
     onSubmit: async (values,{ resetForm }) => {
       try {
-        const response = await axios.post('http://localhost:3333/v1/user', values,
+      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+        const response = await axios.post(`${apiUrl}/v1/user`, values,
         {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',

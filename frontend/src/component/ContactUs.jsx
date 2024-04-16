@@ -22,7 +22,8 @@ const ContactUs = () => {
         }
     
         try {
-          const response = await fetch('http://localhost:3333/v1/contactus/createContactus', {
+          let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+          const response = await fetch(`${apiUrl}/v1/contactus/createContactus`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

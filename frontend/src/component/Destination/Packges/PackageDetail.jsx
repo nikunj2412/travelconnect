@@ -31,12 +31,14 @@ const Package = () => {
     username: loggedUser?.firstName,
     userProfileImg: loggedUser?.profileImg,
   });
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+
   console.log("Pack data", packageData);
   const getPackageData = async () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://localhost:3333/v1/admin/post/${params?.id}`
+        `${apiUrl}/v1/admin/post/${params?.id}`
       );
       const data = await res.json();
       if (data?.status === "Success") {
@@ -66,7 +68,7 @@ const Package = () => {
   const getRatings = async () => {
     try {
       console.log(params.id)
-      const res = await fetch(`http://localhost:3333/v1/rating/getRatingForPackage/${params.id}`);
+      const res = await fetch(`${apiUrl}/v1/rating/getRatingForPackage/${params.id}`);
       const data = await res.json();
       if (data) {
         setPackageRatings(data.data);
@@ -80,7 +82,7 @@ const Package = () => {
   const checkRatingGiven = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3333/v1/rating/ratingGiven/${loggedUser?.id}/${params?.id}`
+        `${apiUrl}/v1/rating/ratingGiven/${loggedUser?.id}/${params?.id}`
       );
       const data = await res.json();
       setCheckRating(data?.data?.flag);
@@ -108,7 +110,7 @@ const Package = () => {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3333/v1/rating/giveRating", {
+      const res = await fetch(`${apiUrl}/v1/rating/giveRating`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

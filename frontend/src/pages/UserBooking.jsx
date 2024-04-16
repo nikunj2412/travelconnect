@@ -6,10 +6,12 @@ const UserBooking = () => {
   const [bookingDetails, setBookingDetails] = useState([]);
   const params = useParams();
 console.log("PARAMs",params.id)
+let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3333/v1/booking/getBookinByUserId/${params.id}`);
+        const response = await fetch(`${apiUrl}/v1/booking/getBookinByUserId/${params.id}`);
         const data = await response.json();
         console.log("Data user",data)
         setBookingDetails(data.data);
@@ -23,7 +25,7 @@ console.log("PARAMs",params.id)
 
   const handleDelete = async (id) => {
     try {
-        const response = await fetch(`http://localhost:3333/v1/booking/deleteBookingById/${id}`, {
+        const response = await fetch(`${apiUrl}/v1/booking/deleteBookingById/${id}`, {
           method: 'DELETE'
         });
         if (response.ok) {

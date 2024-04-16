@@ -9,12 +9,13 @@ const PackageList = () => {
   const [allPackages, setAllPackages] = useState([]);
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [priceFilter, setPriceFilter] = useState(""); 
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     const fetchAllPackages = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:3333/v1/admin/travel-posts`);
+        const res = await fetch(`${apiUrl}/v1/admin/travel-posts`);
         const data = await res.json();
         setLoading(false);
         setAllPackages(data?.data || []);

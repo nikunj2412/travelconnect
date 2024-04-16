@@ -8,11 +8,12 @@ import { useSelector } from "react-redux";
 const TourismPlaces = () => {
   const [places, setplaces] = useState([]);
   const { loggedUser } = useSelector((state) => state.user);
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3333/v1/localTourism/getAllApprovedTourismPost');
+        const response = await axios.get(`${apiUrl}/v1/localTourism/getAllApprovedTourismPost`);
         setplaces(response.data.data);
         console.log(response.data.data);
       } catch (error) {

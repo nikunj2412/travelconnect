@@ -32,11 +32,12 @@ const UserProfile = () => {
     })
   }
   console.log("profile Data",profileData)
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
   
   const updateUserProfile = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3333/v1/user/update/${loggedUser.id}`,
+        `${apiUrl}/v1/user/update/${loggedUser.id}`,
         {
           method: "PUT",
           headers: {
@@ -96,7 +97,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     try {
       dispatch(logOutStart()); 
-      const res = await fetch("http://localhost:3333/v1/user/logout", {
+      const res = await fetch(`${apiUrl}/v1/user/logout`, {
         method: "POST"
       });
       const data = await res.json();
