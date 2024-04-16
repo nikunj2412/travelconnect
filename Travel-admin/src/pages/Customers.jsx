@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 const Customers = () => {
   const [users, setUsers] = useState([]);
+  let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
 
   useEffect(() => {
     fetchUsers();
@@ -11,9 +12,12 @@ const Customers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/v1/admin/`);
-      console.log(response.data.data)
-      setUsers(response.data.data);
+      const response = await fetch(`${apiUrl}/v1/admin/`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+      const data = await response.json();
+      setUsers(data.data);
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -21,9 +25,13 @@ const Customers = () => {
 
   const handleDelete = async (userId) => {
     try {
-      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333';
-      await axios.delete(`${apiUrl}/v1/user/${userId}`);
-      setUsers(users.filter(user => user.id !== userId));
+      const response = await fetch(`${apiUrl}/v1/user/delete/${userId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete user');
+      }
+      setUsers(users.filter((user) => user.id !== userId));
       toast.success('User deleted successfully');
     } catch (error) {
       toast.error('Error deleting user:', error);

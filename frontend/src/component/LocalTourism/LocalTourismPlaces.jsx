@@ -54,20 +54,21 @@ return (
             />
             <div className="p-4">
                 <h3 className="text-gray-600 px-4 font-medium text-xl tracking-tight">
-                  {localPlaces.placeName}
+                  {localPlaces.placeName.length > 22 ? `${localPlaces.placeName.substring(0, 22)}...` : localPlaces.placeName}
                 </h3>
                 <div className="flex items-center justify-between">
                   <div className='flex gap-2 items-center'>
                 <IoLocation/><span className="text-xl font-normal text-gray-900">
-                  {localPlaces.location}
+                {localPlaces.location.length > 18 ? `${localPlaces.location.substring(0, 18)}...` : localPlaces.location}
                   </span>
                   </div>
+                  <Link to={`/add-local-tourism-place/${localPlaces.id}`} className="w-max">
                   <a
-                    href="#"
                     className="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                   >
                    View Details
                   </a>
+                  </Link> 
                 </div>
               </div>
           </div>

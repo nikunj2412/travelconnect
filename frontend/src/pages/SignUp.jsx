@@ -37,9 +37,16 @@ const SignUp = () => {
         console.log('API response:', response.data);
         resetForm();
       } catch (error) {
-        toast.error('Error during API request:', error);
+        if (error.response && error.response.data && error.response.data.message) {
+          if (error.response.data.stack.includes('Email already taken'))
+          {
+            toast.warn('User Already Exist. Please login');
+          } 
+          } else {
+            toast.error('An error occurred during sign up.');
+          }
+        } 
       }
-    },
   });
 
 

@@ -16,6 +16,7 @@ import UserBooking from './pages/UserBooking'
 import Success from './component/payment/Success'
 import Cancel from './component/payment/Cancel'
 import ContactUs from './component/ContactUs'
+import TorismPlaceDetails from './component/LocalTourism/TorismPlaceDetails'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/add-local-tourism-place" element={<AddLocalTourism/>}/>
+        <Route path="/add-local-tourism-place/:id" element={<TorismPlaceDetails/>}/>
         <Route path="/success" element={<Success/>} />
         <Route path="/cancel" element={<Cancel/>} />
         <Route path="/contact" element={<ContactUs/>} />
