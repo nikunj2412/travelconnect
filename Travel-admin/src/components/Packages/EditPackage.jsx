@@ -8,8 +8,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
-
-
+import { toast } from 'react-toastify';
 
 const EditPackage = () => {
   const params = useParams();
@@ -65,6 +64,7 @@ const EditPackage = () => {
       const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
       };
+      console.log("FORM",formData)
     
       const handleImageSubmit = () => {
         if (
@@ -148,27 +148,23 @@ const EditPackage = () => {
         
         try {
           setLoading(true);
-          setError(false);
-          const res = await fetch(`${apiUrl}/v1/admin/update/${params?.id}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-          const data = await res.json();
-          if (data?.success === false) {
-            setError(data?.message);
-            setLoading(false);
+          setError(null);
+          const response = await axios.put(
+            `${import.meta.env.VITE_API_URL}/v1/admin/update/${params.id}`,
+            formData
+          );
+    
+          if (response.data.status === "Success") {
+            toast.success("Package updated successfully")
+            navigate(`/packages`);
+          } else {
+            toast.error(response.data.message || "Failed to update package.");
           }
-          setLoading(false);
-          setError(false);
-          alert(data?.message);
-          // getPackageData();
-          // setImages([]);
-          navigate(`/package/${params?.id}`);
         } catch (err) {
-          console.log(err);
+          console.error("Error updating package:", err);
+          setError("Failed to update package. Please try again.");
+        } finally {
+          setLoading(false);
         }
       };
 
