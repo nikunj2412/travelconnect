@@ -35,11 +35,11 @@ const Booking = () => {
         {bookings.map((booking, index) => (
             <tr key={index} className="border-b border-gray-300">
               <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
-              <td className="border border-gray-300 px-4 py-2">{booking.postId.packageName}</td>
-              <td className="border border-gray-300 px-4 py-2">{booking.userId.firstName}</td>
-              <td className="border border-gray-300 px-4 py-2">{booking.userId.email}</td>
+              <td className="border border-gray-300 px-4 py-2">{booking?.postId?.packageName}</td>
+              <td className="border border-gray-300 px-4 py-2">{booking?.userId?.firstName}</td>
+              <td className="border border-gray-300 px-4 py-2">{booking?.userId?.email}</td>
               <td className="border border-gray-300 px-4 py-2">{new Date(booking.date).toLocaleDateString()}</td>
-              <td className="border border-gray-300 px-4 py-2">${booking.totalPrice}</td>
+              <td className="border border-gray-300 px-4 py-2">${booking?.totalPrice}</td>
             </tr>
           ))}
           
