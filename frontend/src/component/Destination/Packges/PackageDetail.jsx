@@ -91,12 +91,12 @@ const Package = () => {
     }
   };
   const handleRating = async () => {
-    checkRatingGiven();
-    console.log("Checkrating", checkRating)
-    if(checkRating){
-      toast.warn("Already Submitted Rating");
-      return;
-    }
+    // checkRatingGiven();
+    // console.log("Checkrating", checkRating)
+    // if(checkRating){
+    //   toast.warn("Already Submitted Rating");
+    //   return;
+    // }
     if (reviewData.rating === 0 && reviewData.review === "") {
       toast.error("Atleast 1 field is required!");
       return;
@@ -242,9 +242,12 @@ const Package = () => {
               </button>
             </div>
 
+            
               {/* give rating/review */}
               <div className="w-full flex gap-4 flex-col mt-2 items-center">
-                {packageRatings && (
+                {loggedUser ? (
+                  <>
+                  {packageRatings && (
                   <>
                     <h4 className="text-xl">Rating :</h4>
                     <Rating
@@ -283,10 +286,33 @@ const Package = () => {
                     </button>
                     <hr />
                     <div className="mt-3 w-full flex flex-wrap justify-center gap-2 sm:justify-normal"></div>
+                    <div className="mt-3 w-full flex flex-col flex-wrap justify-center gap-2 sm:justify-normal">
+                  <RatingCard packageRatings={packageRatings} />
+                </div>
                   </>
                 )}
-
+                  </>
+                ):(
+                <>
                 <div className="mt-3 w-full flex flex-col flex-wrap justify-center gap-2 sm:justify-normal">
+                  <RatingCard packageRatings={packageRatings} />
+                </div>
+                <div className="mt-8">
+                <button
+                  onClick={() => {
+                    navigate('/signin');
+                  }}
+                  className="p-2 rounded text-white bg-green-700"
+                >
+                  Rate Package
+                </button>
+              </div>
+                </>
+                
+            )}
+          </div>
+
+                {/* <div className="mt-3 w-full flex flex-col flex-wrap justify-center gap-2 sm:justify-normal">
                   <RatingCard packageRatings={packageRatings} />
                 </div>
                 {(!loggedUser || loggedUser === null) && (
@@ -299,7 +325,7 @@ const Package = () => {
                     Rate Package
                   </button>
                 )}
-              </div>
+              </div> */}
               {/* give rating/review */}
             </div>
           </div>

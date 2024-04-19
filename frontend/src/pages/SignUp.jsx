@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -14,6 +14,7 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = () => {
+  const navigate = useNavigate();
  
   const formik = useFormik({
     initialValues: {
@@ -34,6 +35,7 @@ const SignUp = () => {
         }
         );
         toast.success("User Created Successfully")
+        navigate("/signin");
         console.log('API response:', response.data);
         resetForm();
       } catch (error) {
